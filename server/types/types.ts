@@ -4,7 +4,7 @@ export interface IUser {
   id?: ObjectId;
   name: string;
   email: string;
-  password: string;
+  password: string | null;
 }
 
 export interface IApplication {
