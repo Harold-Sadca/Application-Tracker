@@ -9,7 +9,7 @@ async function main () {
     useUnifiedTopology: true,
     
   } as ConnectOptions);
-  console.log('server up')
+  console.log('database up')
 }
 
 export default mongoose

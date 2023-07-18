@@ -16,7 +16,8 @@ exports.login = exports.createUser = void 0;
 const User_1 = __importDefault(require("../schemas/User"));
 const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newUser = User_1.default.create(user);
+        const newUser = yield User_1.default.create(user);
+        newUser.password = null;
         return newUser;
     }
     catch (error) {
@@ -27,7 +28,8 @@ exports.createUser = createUser;
 const login = (name, password) => __awaiter(void 0, void 0, void 0, function* () {
     //compare here later
     try {
-        const user = User_1.default.findOne({ name });
+        const user = yield User_1.default.findOne({ name });
+        user.password = null;
         return user;
     }
     catch (error) {

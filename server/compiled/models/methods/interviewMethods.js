@@ -14,9 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateInterview = exports.getInterview = exports.createInterview = void 0;
 const Interview_1 = __importDefault(require("../schemas/Interview"));
-const createInterview = (interview) => __awaiter(void 0, void 0, void 0, function* () {
+const createInterview = (id, interview) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newInterview = Interview_1.default.create(interview);
+        const newInterview = new Interview_1.default(interview);
+        newInterview.application = id;
+        yield newInterview.save();
         return newInterview;
     }
     catch (error) {
@@ -26,7 +28,7 @@ const createInterview = (interview) => __awaiter(void 0, void 0, void 0, functio
 exports.createInterview = createInterview;
 const getInterview = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const interview = Interview_1.default.findById(id);
+        const interview = yield Interview_1.default.findById(id);
         return interview;
     }
     catch (error) {
@@ -36,7 +38,7 @@ const getInterview = (id) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getInterview = getInterview;
 const updateInterview = (id, interview) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const updatedInterview = Interview_1.default.findByIdAndUpdate(id, Object.assign({}, interview));
+        const updatedInterview = yield Interview_1.default.findByIdAndUpdate(id, Object.assign({}, interview));
         return updatedInterview;
     }
     catch (error) {

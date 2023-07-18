@@ -10,7 +10,7 @@ const interviewSchema = new Schema({
     id: mongodb_1.ObjectId,
     time: { type: String, required: true },
     date: { type: Date, required: true },
-    application: [{ type: Schema.Types.ObjectId, ref: 'Application' }],
+    application: { type: Schema.Types.ObjectId, ref: 'Application' },
 });
 const Interview = __1.default.model('Interview', interviewSchema);
 exports.default = Interview;

@@ -20,7 +20,7 @@ function main() {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        console.log('server up');
+        console.log('database up');
     });
 }
 exports.default = mongoose_1.default;

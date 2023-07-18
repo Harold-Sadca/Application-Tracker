@@ -9,7 +9,7 @@ const Schema = index_1.default.Schema;
 const userSchema = new Schema({
     id: mongodb_1.ObjectId,
     name: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: true } || null,
     password: { type: String, required: true },
 });
 const User = index_1.default.model('User', userSchema);
