@@ -18,5 +18,5 @@ export interface IInterview {
   id?:ObjectId;
   time:string;
   date:Date;
-  application:string;
+  application:ObjectId;
 }

@@ -8,7 +8,7 @@ const interviewSchema = new Schema<IInterview>({
   id: ObjectId,
   time: { type: String, required: true },
   date: { type: Date, required: true },
-  application: [{type: Schema.Types.ObjectId, ref: 'Application'}],
+  application: {type: Schema.Types.ObjectId, ref: 'Application'},
 })
 
 const Interview = mongoose.model<IInterview>('Interview', interviewSchema)
