@@ -12,15 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-main().catch(err => console.log(err));
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield mongoose_1.default.connect('mongodb://127.0.0.1:27017/application-tracker', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        console.log('server up');
-    });
-}
-exports.default = mongoose_1.default;
+exports.login = exports.createUser = void 0;
+const User_1 = __importDefault(require("../schemas/User"));
+const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const newUser = User_1.default.create(user);
+        return newUser;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.createUser = createUser;
+const login = (name, password) => __awaiter(void 0, void 0, void 0, function* () {
+    //compare here later
+    try {
+        const user = User_1.default.findOne({ name });
+        return user;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.login = login;
