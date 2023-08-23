@@ -5,10 +5,11 @@ export interface TypeUser {
   username?: string;
   email?: string;
   password?: string | null;
+  applications?: [ObjectId];
 }
 
 export interface TypeApplication {
-  id?: ObjectId;
+  _id?: ObjectId;
   company: string;
   date: Date;
   status:
@@ -19,10 +20,11 @@ export interface TypeApplication {
     | 'Offer Received'
     | 'Offer Rejected'
     | 'Rejected';
+  applicant?: ObjectId;
 }
 
 export interface TypeInterview {
-  id?: ObjectId;
+  _id?: ObjectId;
   time: string;
   date: Date;
   application: ObjectId;

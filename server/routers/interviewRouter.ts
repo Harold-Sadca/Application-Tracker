@@ -1,10 +1,15 @@
 import { Router } from 'express';
-import { createInterviewController, getInterviewController, updateInterviewController } from '../controllers/interviewController';
+import {
+  createInterviewController,
+  getInterviewController,
+  updateInterviewController,
+} from '../controllers/interviewController';
+import { authenticate } from '../utils/authMiddleware';
 
-const interviewRouter = Router()
+const interviewRouter = Router();
 
-interviewRouter.post('/create', createInterviewController)
-interviewRouter.get('/get/:id', getInterviewController)
-interviewRouter.put('/update/:id', updateInterviewController)
+interviewRouter.post('/create', authenticate, createInterviewController);
+interviewRouter.get('/get/:id', authenticate, getInterviewController);
+interviewRouter.put('/update/:id', authenticate, updateInterviewController);
 
-export default interviewRouter
+export default interviewRouter;

@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema<TypeUser>({
   email: { type: String, required: true } || null,
+  applications: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
 });
 
 userSchema.plugin(passportLocalMongoose);

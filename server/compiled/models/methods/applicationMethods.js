@@ -14,9 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateApplication = exports.getApplication = exports.createApplication = void 0;
 const Application_1 = __importDefault(require("../schemas/Application"));
-const createApplication = (application) => __awaiter(void 0, void 0, void 0, function* () {
+const User_1 = __importDefault(require("../schemas/User"));
+const createApplication = (application, _id) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
-        const newApplication = Application_1.default.create(application);
+        const newApplication = new Application_1.default(application);
+        const user = yield User_1.default.findById(_id);
+        (_a = user === null || user === void 0 ? void 0 : user.applications) === null || _a === void 0 ? void 0 : _a.push(newApplication.id);
+        newApplication.applicant = user === null || user === void 0 ? void 0 : user._id;
+        yield (user === null || user === void 0 ? void 0 : user.save());
+        yield newApplication.save();
+        yield newApplication.populate('applicant', 'username');
         return newApplication;
     }
     catch (error) {

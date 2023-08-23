@@ -5,7 +5,6 @@ import { TypeApplication } from '../../types/types';
 const Schema = mongoose.Schema;
 
 const applicationSchema = new Schema<TypeApplication>({
-  id: ObjectId,
   company: { type: String, required: true },
   date: { type: Date, required: true },
   status: {
@@ -19,6 +18,10 @@ const applicationSchema = new Schema<TypeApplication>({
       'Offer Rejected',
       'Rejected',
     ],
+  },
+  applicant: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
 });
 

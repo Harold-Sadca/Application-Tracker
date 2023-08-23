@@ -1,9 +1,20 @@
+import { ObjectId } from 'mongodb';
 import Application from '../schemas/Application';
 import { TypeApplication } from '../../types/types';
+import User from '../schemas/User';
 
-export const createApplication = async (application: TypeApplication) => {
+export const createApplication = async (
+  application: TypeApplication,
+  _id: string
+) => {
   try {
-    const newApplication = Application.create(application);
+    const newApplication = new Application(application);
+    const user = await User.findById(_id);
+    user?.applications?.push(newApplication.id);
+    newApplication.applicant = user?._id;
+    await user?.save();
+    await newApplication.save();
+    await newApplication.populate('applicant', 'username');
     return newApplication;
   } catch (error) {
     console.log(error);

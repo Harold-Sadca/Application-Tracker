@@ -8,6 +8,7 @@ const passport_local_mongoose_1 = __importDefault(require("passport-local-mongoo
 const Schema = index_1.default.Schema;
 const userSchema = new Schema({
     email: { type: String, required: true } || null,
+    applications: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
 });
 userSchema.plugin(passport_local_mongoose_1.default);
 const User = index_1.default.model('User', userSchema);

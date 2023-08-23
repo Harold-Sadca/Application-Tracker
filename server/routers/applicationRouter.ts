@@ -1,10 +1,19 @@
 import { Router } from 'express';
-import { createApplicationController, getApplicationController, updateApplicationController } from '../controllers/applicationController';
+import {
+  createApplicationController,
+  getApplicationController,
+  updateApplicationController,
+} from '../controllers/applicationController';
+import { authenticate } from '../utils/authMiddleware';
 
-const applicationRouter = Router()
+const applicationRouter = Router();
 
-applicationRouter.post('/create', createApplicationController)
-applicationRouter.get('/get/:id', getApplicationController)
-applicationRouter.put('/update/:id', updateApplicationController)
+applicationRouter.post(
+  '/create/:user_id',
+  authenticate,
+  createApplicationController
+);
+applicationRouter.get('/get/:id', authenticate, getApplicationController);
+applicationRouter.put('/update/:id', authenticate, updateApplicationController);
 
-export default applicationRouter
+export default applicationRouter;

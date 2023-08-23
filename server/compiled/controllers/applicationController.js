@@ -14,13 +14,14 @@ const applicationMethods_1 = require("../models/methods/applicationMethods");
 const createApplicationController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { company, date, status } = req.body;
-        if (company && date && status) {
+        const { user_id } = req.params;
+        if (company && date && status && user_id) {
             const application = { company, date, status };
-            const newApplication = (0, applicationMethods_1.createApplication)(application);
+            const newApplication = yield (0, applicationMethods_1.createApplication)(application, user_id);
             res.status(201).send(newApplication);
         }
         else {
-            res.status(400).send((JSON.stringify('Missing Some Information.')));
+            res.status(400).send(JSON.stringify('Missing Some Information.'));
         }
     }
     catch (error) {
@@ -49,7 +50,7 @@ const updateApplicationController = (req, res) => __awaiter(void 0, void 0, void
             res.status(201).send(updatedApplication);
         }
         else {
-            res.status(400).send((JSON.stringify('Missing Some Information.')));
+            res.status(400).send(JSON.stringify('Missing Some Information.'));
         }
     }
     catch (error) {

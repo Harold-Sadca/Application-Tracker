@@ -4,10 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const __1 = __importDefault(require(".."));
-const mongodb_1 = require("mongodb");
 const Schema = __1.default.Schema;
 const applicationSchema = new Schema({
-    id: mongodb_1.ObjectId,
     company: { type: String, required: true },
     date: { type: Date, required: true },
     status: {
@@ -21,6 +19,10 @@ const applicationSchema = new Schema({
             'Offer Rejected',
             'Rejected',
         ],
+    },
+    applicant: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     },
 });
 const Application = __1.default.model('Application', applicationSchema);
