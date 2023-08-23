@@ -1,22 +1,29 @@
-import { ObjectId } from "mongodb";
+import { ObjectId } from 'mongodb';
 
-export interface IUser {
-  id?: ObjectId;
-  name: string;
-  email: string;
-  password: string | null;
+export interface TypeUser {
+  _id?: ObjectId;
+  username?: string;
+  email?: string;
+  password?: string | null;
 }
 
-export interface IApplication {
+export interface TypeApplication {
   id?: ObjectId;
   company: string;
-  date:Date;
-  status: 'To Apply' | 'Applied' | 'Interview Scheduled' | 'Interviewing' | 'Offer Received' | 'Offer Rejected' | 'Rejected'
+  date: Date;
+  status:
+    | 'To Apply'
+    | 'Applied'
+    | 'Interview Scheduled'
+    | 'Interviewing'
+    | 'Offer Received'
+    | 'Offer Rejected'
+    | 'Rejected';
 }
 
-export interface IInterview {
-  id?:ObjectId;
-  time:string;
-  date:Date;
-  application:ObjectId;
+export interface TypeInterview {
+  id?: ObjectId;
+  time: string;
+  date: Date;
+  application: ObjectId;
 }

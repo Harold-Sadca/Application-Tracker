@@ -4,13 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = __importDefault(require("../index"));
-const mongodb_1 = require("mongodb");
+const passport_local_mongoose_1 = __importDefault(require("passport-local-mongoose"));
 const Schema = index_1.default.Schema;
 const userSchema = new Schema({
-    id: mongodb_1.ObjectId,
-    name: { type: String, required: true },
     email: { type: String, required: true } || null,
-    password: { type: String, required: true },
 });
+userSchema.plugin(passport_local_mongoose_1.default);
 const User = index_1.default.model('User', userSchema);
 exports.default = User;

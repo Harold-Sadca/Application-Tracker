@@ -12,7 +12,15 @@ const applicationSchema = new Schema({
     date: { type: Date, required: true },
     status: {
         type: String,
-        enum: ['To Apply', 'Applied', 'Interview Scheduled', 'Interviewing', 'Offer Received', 'Offer Rejected', 'Rejected']
+        enum: [
+            'To Apply',
+            'Applied',
+            'Interview Scheduled',
+            'Interviewing',
+            'Offer Received',
+            'Offer Rejected',
+            'Rejected',
+        ],
     },
 });
 const Application = __1.default.model('Application', applicationSchema);

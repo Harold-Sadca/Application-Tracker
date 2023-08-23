@@ -1,16 +1,15 @@
-import mongoose from '../index'
-import { ObjectId } from "mongodb";
-import { IUser } from '../../types/types';
+import mongoose from '../index';
+import passportLocalMongoose from 'passport-local-mongoose';
+import { TypeUser } from '../../types/types';
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-const userSchema = new Schema<IUser>({
-  id: ObjectId,
-  name: { type: String, required: true },
+const userSchema = new Schema<TypeUser>({
   email: { type: String, required: true } || null,
-  password: { type: String, required: true },
-})
+});
 
-const User = mongoose.model<IUser>('User', userSchema)
+userSchema.plugin(passportLocalMongoose);
 
-export default User
+const User = mongoose.model<TypeUser>('User', userSchema);
+
+export default User;
