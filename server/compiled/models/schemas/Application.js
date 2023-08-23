@@ -24,6 +24,10 @@ const applicationSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
     },
+    nextInterview: {
+        type: Schema.Types.ObjectId,
+        ref: 'Interview',
+    },
 });
 const Application = __1.default.model('Application', applicationSchema);
 exports.default = Application;

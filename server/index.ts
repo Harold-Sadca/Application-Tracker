@@ -63,7 +63,7 @@ app
 
 passport.use(new LocalStrategy(User.authenticate()));
 
-passport.serializeUser((user: TypeUser, callback) => {
+passport.serializeUser((user: Partial<TypeUser>, callback) => {
   process.nextTick(() => {
     return callback(null, {
       id: user._id,

@@ -2,9 +2,9 @@ import { ObjectId } from 'mongodb';
 
 export interface TypeUser {
   _id?: ObjectId;
-  username?: string;
-  email?: string;
-  password?: string | null;
+  username: string;
+  email: string;
+  password: string | null;
   applications?: [ObjectId];
 }
 
@@ -21,6 +21,7 @@ export interface TypeApplication {
     | 'Offer Rejected'
     | 'Rejected';
   applicant?: ObjectId;
+  nextInterview?: ObjectId;
 }
 
 export interface TypeInterview {
@@ -28,4 +29,5 @@ export interface TypeInterview {
   time: string;
   date: Date;
   application: ObjectId;
+  result?: 'Passed' | 'Failed';
 }

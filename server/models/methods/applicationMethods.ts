@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb';
 import Application from '../schemas/Application';
 import { TypeApplication } from '../../types/types';
 import User from '../schemas/User';

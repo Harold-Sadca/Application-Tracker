@@ -1,5 +1,4 @@
 import mongoose from '..';
-import { ObjectId } from 'mongodb';
 import { TypeApplication } from '../../types/types';
 
 const Schema = mongoose.Schema;
@@ -22,6 +21,10 @@ const applicationSchema = new Schema<TypeApplication>({
   applicant: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+  },
+  nextInterview: {
+    type: Schema.Types.ObjectId,
+    ref: 'Interview',
   },
 });
 

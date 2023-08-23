@@ -1,6 +1,7 @@
 import Interview from '../schemas/Interview';
 import { TypeInterview } from '../../types/types';
 import { ObjectId } from 'mongodb';
+import Application from '../schemas/Application';
 
 export const createInterview = async (
   id: ObjectId,
@@ -8,7 +9,10 @@ export const createInterview = async (
 ) => {
   try {
     const newInterview = new Interview(interview);
+    const application = await Application.findById(id);
     newInterview.application = id;
+    application!.nextInterview = newInterview._id;
+    await application?.save();
     await newInterview.save();
     return newInterview;
   } catch (error) {
