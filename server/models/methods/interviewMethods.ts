@@ -4,8 +4,8 @@ import { ObjectId } from 'mongodb';
 import Application from '../schemas/Application';
 
 export const createInterview = async (
-  id: ObjectId,
-  interview: Partial<TypeInterview>
+  interview: Partial<TypeInterview>,
+  id: ObjectId
 ) => {
   try {
     const newInterview = new Interview(interview);

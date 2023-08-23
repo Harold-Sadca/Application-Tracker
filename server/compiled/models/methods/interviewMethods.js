@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateInterview = exports.getInterview = exports.createInterview = void 0;
 const Interview_1 = __importDefault(require("../schemas/Interview"));
 const Application_1 = __importDefault(require("../schemas/Application"));
-const createInterview = (id, interview) => __awaiter(void 0, void 0, void 0, function* () {
+const createInterview = (interview, id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newInterview = new Interview_1.default(interview);
         const application = yield Application_1.default.findById(id);

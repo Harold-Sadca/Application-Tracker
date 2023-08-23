@@ -17,7 +17,7 @@ const createInterviewController = (req, res) => __awaiter(void 0, void 0, void 0
         const { date, time } = req.body;
         if (id && date && time) {
             const interview = { date, time };
-            const newInterview = yield (0, interviewMethods_1.createInterview)(id, interview);
+            const newInterview = yield (0, interviewMethods_1.createInterview)(interview, id);
             res.status(201).send(newInterview);
         }
         else {

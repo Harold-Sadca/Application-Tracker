@@ -22,7 +22,7 @@ export const createApplication = async (
 
 export const getApplication = async (id: string) => {
   try {
-    const application = Application.findById(id);
+    const application = Application.findById(id).populate('nextInterview');
     return application;
   } catch (error) {
     console.log(error);

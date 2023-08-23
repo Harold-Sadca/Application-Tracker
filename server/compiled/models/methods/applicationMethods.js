@@ -34,7 +34,7 @@ const createApplication = (application, _id) => __awaiter(void 0, void 0, void 0
 exports.createApplication = createApplication;
 const getApplication = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const application = Application_1.default.findById(id);
+        const application = Application_1.default.findById(id).populate('nextInterview');
         return application;
     }
     catch (error) {
