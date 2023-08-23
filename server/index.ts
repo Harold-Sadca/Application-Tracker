@@ -78,9 +78,9 @@ passport.deserializeUser((user: TypeUser, cb) => {
   });
 });
 
-app.use('application', applicationRouter);
-app.use('interview', interviewRouter);
-app.use('user', userRouter);
+app.use('/application', applicationRouter);
+app.use('/interview', interviewRouter);
+app.use('/user', userRouter);
 
 app.listen(port, () => {
   console.log(`Running at ${port}`);

@@ -12,28 +12,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.createUser = void 0;
+exports.findUser = exports.createUser = void 0;
 const User_1 = __importDefault(require("../schemas/User"));
 const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, username, password } = user;
     try {
-        const newUser = yield User_1.default.create(user);
-        newUser.password = null;
-        return newUser;
+        const newUser = new User_1.default({ username, email });
+        const registeredUser = yield User_1.default.register(newUser, password);
+        return registeredUser;
     }
     catch (error) {
         console.log(error);
     }
 });
 exports.createUser = createUser;
-const login = (name, password) => __awaiter(void 0, void 0, void 0, function* () {
-    //compare here later
+const findUser = (_id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield User_1.default.findOne({ name });
-        user.password = null;
+        const user = yield User_1.default.findOne({ _id });
         return user;
     }
     catch (error) {
         console.log(error);
     }
 });
-exports.login = login;
+exports.findUser = findUser;

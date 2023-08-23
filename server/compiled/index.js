@@ -69,9 +69,9 @@ passport_1.default.deserializeUser((user, cb) => {
         return cb(null, user);
     });
 });
-app.use('application', applicationRouter_1.default);
-app.use('interview', interviewRouter_1.default);
-app.use('user', userRouter_1.default);
+app.use('/application', applicationRouter_1.default);
+app.use('/interview', interviewRouter_1.default);
+app.use('/user', userRouter_1.default);
 app.listen(port, () => {
     console.log(`Running at ${port}`);
 });
