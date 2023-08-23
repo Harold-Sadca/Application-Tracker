@@ -1,5 +1,6 @@
 import User from '../schemas/User';
 import { TypeUser } from '../../types/types';
+import { ObjectId } from 'mongodb';
 
 export const createUser = async (user: TypeUser) => {
   const { email, username, password } = user;
@@ -12,9 +13,14 @@ export const createUser = async (user: TypeUser) => {
   }
 };
 
-export const findUser = async (_id: string) => {
+export const findUser = async (_id: ObjectId) => {
   try {
-    const user = await User.findOne({ _id });
+    const user = await User.findOne({ _id }).populate({
+      path: 'applications',
+      populate: {
+        path: 'nextInterview',
+      },
+    });
     return user;
   } catch (error) {
     console.log(error);

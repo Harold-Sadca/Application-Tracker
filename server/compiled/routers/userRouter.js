@@ -4,7 +4,7 @@ const express_1 = require("express");
 const userController_1 = require("../controllers/userController");
 const userRouter = (0, express_1.Router)();
 userRouter.post('/register', userController_1.createUserController);
-userRouter.post('/login/:id', userController_1.loginController);
+userRouter.post('/login', userController_1.loginController);
 exports.default = userRouter;
 // {
 //   "email": "tester@gmail.com",

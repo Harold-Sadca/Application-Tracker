@@ -30,7 +30,6 @@ function main() {
             db.dropDatabase();
             console.log('Database connected. Starting seeding.');
             for (let i = 0; i < dataHelper_1.mockUsers.length; i++) {
-                console.log('seeding');
                 const user = yield (0, userMethods_1.createUser)(dataHelper_1.mockUsers[i]);
                 const application1 = yield (0, applicationMethods_1.createApplication)(dataHelper_1.mockApplications[i], user === null || user === void 0 ? void 0 : user._id);
                 const application2 = yield (0, applicationMethods_1.createApplication)(dataHelper_1.mockApplications[i + 1], user === null || user === void 0 ? void 0 : user._id);
@@ -38,7 +37,6 @@ function main() {
                 const interview2 = yield (0, interviewMethods_1.createInterview)(dataHelper_1.mockInterviews[i + 1], application2 === null || application2 === void 0 ? void 0 : application2._id);
             }
             console.log('Database seeding complete.');
-            // db.close();
         }));
     });
 }

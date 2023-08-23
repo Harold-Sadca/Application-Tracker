@@ -32,7 +32,7 @@ exports.createApplicationController = createApplicationController;
 const getApplicationController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const application = (0, applicationMethods_1.getApplication)(id);
+        const application = yield (0, applicationMethods_1.getApplication)(id);
         res.status(200).send(application);
     }
     catch (error) {
@@ -46,7 +46,7 @@ const updateApplicationController = (req, res) => __awaiter(void 0, void 0, void
         const { company, date, status } = req.body;
         if (company && date && status && id) {
             const application = { company, date, status };
-            const updatedApplication = (0, applicationMethods_1.updateApplication)(id, application);
+            const updatedApplication = yield (0, applicationMethods_1.updateApplication)(id, application);
             res.status(201).send(updatedApplication);
         }
         else {

@@ -22,7 +22,10 @@ export const createApplication = async (
 
 export const getApplication = async (id: string) => {
   try {
-    const application = Application.findById(id).populate('nextInterview');
+    const application = await Application.findById(id).populate(
+      'nextInterview'
+    );
+    console.log(application);
     return application;
   } catch (error) {
     console.log(error);
@@ -34,7 +37,7 @@ export const updateApplication = async (
   application: TypeApplication
 ) => {
   try {
-    const updatedApplication = Application.findByIdAndUpdate(id, {
+    const updatedApplication = await Application.findByIdAndUpdate(id, {
       ...application,
     });
     return updatedApplication;

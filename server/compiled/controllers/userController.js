@@ -46,8 +46,9 @@ const loginController = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
                 if (err)
                     throw err;
                 console.log('got to login');
-                const { id } = req.params;
-                req.user = (yield (0, userMethods_1.findUser)(id));
+                const { _id } = req.user;
+                console.log(req.user);
+                req.user = (yield (0, userMethods_1.findUser)(_id));
                 res.status(200).send(req.user);
             }));
         }

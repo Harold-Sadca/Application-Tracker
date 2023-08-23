@@ -27,7 +27,7 @@ export const createApplicationController = async (
 export const getApplicationController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const application = getApplication(id);
+    const application = await getApplication(id);
     res.status(200).send(application);
   } catch (error) {
     res.status(500).send(error);
@@ -43,7 +43,7 @@ export const updateApplicationController = async (
     const { company, date, status } = req.body;
     if (company && date && status && id) {
       const application = { company, date, status };
-      const updatedApplication = updateApplication(id, application);
+      const updatedApplication = await updateApplication(id, application);
       res.status(201).send(updatedApplication);
     } else {
       res.status(400).send(JSON.stringify('Missing Some Information.'));

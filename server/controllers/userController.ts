@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import passport from 'passport';
 import { createUser, findUser } from '../models/methods/userMethods';
 import { TypeUser } from '../types/types';
+import { ObjectId } from 'mongodb';
 
 export const createUserController = async (req: Request, res: Response) => {
   try {
@@ -35,8 +36,9 @@ export const loginController = async (
         req.logIn(user, async (err) => {
           if (err) throw err;
           console.log('got to login');
-          const { id } = req.params;
-          req.user = (await findUser(id)) as TypeUser;
+          const { _id } = req.user as TypeUser;
+          console.log(req.user);
+          req.user = (await findUser(_id as ObjectId)) as TypeUser;
           res.status(200).send(req.user);
         });
       }

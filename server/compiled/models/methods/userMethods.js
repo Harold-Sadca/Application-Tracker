@@ -28,7 +28,12 @@ const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
 exports.createUser = createUser;
 const findUser = (_id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield User_1.default.findOne({ _id });
+        const user = yield User_1.default.findOne({ _id }).populate({
+            path: 'applications',
+            populate: {
+                path: 'nextInterview',
+            },
+        });
         return user;
     }
     catch (error) {

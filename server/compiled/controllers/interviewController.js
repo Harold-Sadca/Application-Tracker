@@ -46,8 +46,8 @@ const updateInterviewController = (req, res) => __awaiter(void 0, void 0, void 0
         const { date, time, application } = req.body;
         const interview = { date, time, application };
         if (date && time && application && id) {
-            const updatedInterview = (0, interviewMethods_1.updateInterview)(id, interview);
-            res.status(200).send(interviewMethods_1.updateInterview);
+            const updatedInterview = yield (0, interviewMethods_1.updateInterview)(id, interview);
+            res.status(200).send(updatedInterview);
         }
         else {
             res.status(400).send(JSON.stringify('Missing Some Information.'));

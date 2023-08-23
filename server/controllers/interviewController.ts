@@ -44,8 +44,8 @@ export const updateInterviewController = async (
     const { date, time, application } = req.body;
     const interview = { date, time, application };
     if (date && time && application && id) {
-      const updatedInterview = updateInterview(id, interview);
-      res.status(200).send(updateInterview);
+      const updatedInterview = await updateInterview(id, interview);
+      res.status(200).send(updatedInterview);
     } else {
       res.status(400).send(JSON.stringify('Missing Some Information.'));
     }

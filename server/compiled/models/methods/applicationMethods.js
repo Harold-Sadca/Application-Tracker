@@ -34,7 +34,8 @@ const createApplication = (application, _id) => __awaiter(void 0, void 0, void 0
 exports.createApplication = createApplication;
 const getApplication = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const application = Application_1.default.findById(id).populate('nextInterview');
+        const application = yield Application_1.default.findById(id).populate('nextInterview');
+        console.log(application);
         return application;
     }
     catch (error) {
@@ -44,7 +45,7 @@ const getApplication = (id) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getApplication = getApplication;
 const updateApplication = (id, application) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const updatedApplication = Application_1.default.findByIdAndUpdate(id, Object.assign({}, application));
+        const updatedApplication = yield Application_1.default.findByIdAndUpdate(id, Object.assign({}, application));
         return updatedApplication;
     }
     catch (error) {
