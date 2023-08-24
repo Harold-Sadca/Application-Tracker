@@ -16,3 +16,5 @@ async function login(user: TypeLogin) {
     })
     .catch((error) => error.response.data.error);
 }
+
+export { login };
