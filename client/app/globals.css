@@ -17,6 +17,7 @@
 
 .header {
   color: var(--primary-colour);
+  font-weight: 800;
 }
 
 .main-body {
@@ -24,6 +25,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.btn-1 {
+  color: var(--text-colour);
+  font-weight: 700;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--primary-colour);
+  transition: all 1s ease-in-out;
+}
+
+.btn-1:hover {
+  background-color: var(--primary-colour);
+  color: var(--background-colour);
+  border: 1px solid var(--background-colour);
+  border-radius: 5rem;
 }
 
 
