@@ -22,7 +22,7 @@ export default function RegisterForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const user = await login(formState);
+    console.log(formState);
     setFormState(initialState);
   };
 
@@ -43,7 +43,7 @@ export default function RegisterForm() {
             type='email'
             className='input'
             placeholder='email'
-            name='username'
+            name='email'
             onChange={(e) => handleChange(e)}
             required
           />
