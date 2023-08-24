@@ -1,10 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import LoginForm from '@/(components)/(tsx)/LoginForm';
 import RegisterForm from '@/(components)/(tsx)/RegisterForm';
+import { RootState } from '@/redux/store';
 
 export default function Home() {
-  const [register, setRegister] = useState(false);
+  const register = useSelector(
+    (state: RootState) => state.registerReducer.value
+  );
 
   return (
     <main>

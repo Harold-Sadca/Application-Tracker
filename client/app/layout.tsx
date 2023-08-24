@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
+import { ReduxProvider } from '@/redux/provider';
 
 const inter = Open_Sans({ weight: '400', subsets: ['latin'] });
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   );
 }

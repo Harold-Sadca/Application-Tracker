@@ -3,6 +3,8 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import '../(css)/loginForm.css';
 import { TypeLogin } from '@/utils/types';
 import { login } from '@/utils/APIservices';
+import { useDispatch } from 'react-redux';
+import { setLoginState } from '@/redux/features/registerSlice';
 
 const initialState = {
   username: '',
@@ -11,6 +13,7 @@ const initialState = {
 
 export default function LoginForm() {
   const [formState, setFormState] = useState<TypeLogin>(initialState);
+  const dispatch = useDispatch();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -24,6 +27,10 @@ export default function LoginForm() {
     e.preventDefault();
     const user = await login(formState);
     setFormState(initialState);
+  };
+
+  const handleRegister = () => {
+    dispatch(setLoginState(true));
   };
 
   return (
@@ -52,7 +59,7 @@ export default function LoginForm() {
           </button>
           <div>
             <p>Or click the button bellow to register</p>
-            <button type='submit' className='btn-1'>
+            <button type='submit' className='btn-1' onClick={handleRegister}>
               Register
             </button>
           </div>
