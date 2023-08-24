@@ -1,16 +1,16 @@
-'use client';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import '../(css)/loginForm.css';
-import { TypeLogin } from '@/utils/types';
+import { TypeLogin, TypeRegister } from '@/utils/types';
 import { login } from '@/utils/APIservices';
 
 const initialState = {
   username: '',
   password: '',
+  email: '',
 };
 
-export default function LoginForm() {
-  const [formState, setFormState] = useState<TypeLogin>(initialState);
+export default function RegisterForm() {
+  const [formState, setFormState] = useState<TypeRegister>(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -29,12 +29,20 @@ export default function LoginForm() {
   return (
     <>
       <section className='main-body login'>
-        <p className='header'>Login</p>
+        <p className='header'>Register</p>
         <form className='input-container' onSubmit={(e) => handleSubmit(e)}>
           <input
             type='text'
             className='input'
             placeholder='username'
+            name='username'
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <input
+            type='email'
+            className='input'
+            placeholder='email'
             name='username'
             onChange={(e) => handleChange(e)}
             required
@@ -48,14 +56,8 @@ export default function LoginForm() {
             required
           />
           <button type='submit' className='btn-1'>
-            Login
+            Register
           </button>
-          <div>
-            <p>Or click the button bellow to register</p>
-            <button type='submit' className='btn-1'>
-              Register
-            </button>
-          </div>
         </form>
       </section>
     </>
