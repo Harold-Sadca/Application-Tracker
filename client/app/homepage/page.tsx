@@ -1,10 +1,15 @@
 'use client';
 
+import LoginForm from '@/(components)/LoginForm';
+
 export default function Home() {
   return (
     <main>
-      <div>
+      <div className='main-body'>
         <h1 className='header'>Homepage</h1>
+        <div>
+          <LoginForm />
+        </div>
       </div>
     </main>
   );
