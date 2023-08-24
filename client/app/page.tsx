@@ -1,16 +1,12 @@
-import Image from 'next/image';
-import styles from './page.module.css';
+'use client';
 
-export default function Home() {
-  const handleClick = () => {
-    console.log(styles);
-  };
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-  return (
-    <main>
-      <div>
-        <button>Click</button>
-      </div>
-    </main>
-  );
+export default function Main() {
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/homepage');
+  }, []);
+  return null;
 }
