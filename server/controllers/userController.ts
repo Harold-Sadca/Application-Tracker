@@ -9,9 +9,13 @@ export const createUserController = async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
     if (username && email && password) {
       const user = { username, email, password };
+      console.log({ user });
       const newUser = await createUser(user);
-      console.log(newUser);
-      res.status(201).send(newUser);
+      const response = {
+        username: newUser?.username,
+        email: newUser?.email,
+      };
+      res.status(201).send(response);
     } else {
       res.status(400).send(JSON.stringify('Missing Credentials.'));
     }

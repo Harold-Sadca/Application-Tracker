@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import '../(css)/loginForm.css';
 import { TypeLogin, TypeRegister } from '@/utils/types';
-import { login } from '@/utils/APIservices';
+import { register } from '@/utils/APIservices';
 
 const initialState = {
   username: '',
@@ -22,7 +22,7 @@ export default function RegisterForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formState);
+    const user = await register(formState);
     setFormState(initialState);
   };
 

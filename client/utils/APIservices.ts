@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TypeLogin } from './types';
+import { TypeLogin, TypeRegister } from './types';
 
 const PORT = process.env.PORT || 'http://localhost:3001';
 
@@ -17,4 +17,18 @@ async function login(user: TypeLogin) {
     .catch((error) => error.response.data.error);
 }
 
-export { login };
+async function register(user: TypeRegister) {
+  return axios
+    .post(PORT + '/user/register', JSON.stringify(user), {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => error.response.data.error);
+}
+
+export { login, register };

@@ -17,7 +17,7 @@ const userRouter_1 = __importDefault(require("./routers/userRouter"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const User_1 = __importDefault(require("./models/schemas/User"));
 dotenv_1.default.config();
-const port = process.env.PORT;
+const port = process.env.PORT || 3001;
 const uri = process.env.DB_URL;
 const secret = process.env.SECRET_KEY_WORD;
 const app = (0, express_1.default)();

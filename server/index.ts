@@ -16,7 +16,7 @@ import User from './models/schemas/User';
 import { TypeUser } from './types/types';
 
 dotenv.config();
-const port = process.env.PORT;
+const port = process.env.PORT || 3001;
 const uri = process.env.DB_URL as string;
 const secret = process.env.SECRET_KEY_WORD as string;
 const app: Express = express();

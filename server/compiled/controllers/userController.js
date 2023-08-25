@@ -20,9 +20,13 @@ const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
         const { username, email, password } = req.body;
         if (username && email && password) {
             const user = { username, email, password };
+            console.log({ user });
             const newUser = yield (0, userMethods_1.createUser)(user);
-            console.log(newUser);
-            res.status(201).send(newUser);
+            const response = {
+                username: newUser === null || newUser === void 0 ? void 0 : newUser.username,
+                email: newUser === null || newUser === void 0 ? void 0 : newUser.email,
+            };
+            res.status(201).send(response);
         }
         else {
             res.status(400).send(JSON.stringify('Missing Credentials.'));

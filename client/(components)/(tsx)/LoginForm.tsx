@@ -26,6 +26,7 @@ export default function LoginForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = await login(formState);
+    console.log(user);
     setFormState(initialState);
   };
 
