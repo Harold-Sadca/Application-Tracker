@@ -31,4 +31,18 @@ async function register(user: TypeRegister) {
     .catch((error) => error.response.data.error);
 }
 
-export { login, register };
+async function getUser() {
+  return axios
+    .get(PORT + '/user/get-user', {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => error.response.data.error);
+}
+
+export { login, register, getUser };

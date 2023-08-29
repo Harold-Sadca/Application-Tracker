@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const userController_1 = require("../controllers/userController");
+const authMiddleware_1 = require("../utils/authMiddleware");
 const userRouter = (0, express_1.Router)();
 userRouter.post('/register', userController_1.createUserController);
 userRouter.post('/login', userController_1.loginController);
+userRouter.get('/get-user', authMiddleware_1.authenticate, userController_1.getUser);
 exports.default = userRouter;
 // {
 //   "email": "tester@gmail.com",

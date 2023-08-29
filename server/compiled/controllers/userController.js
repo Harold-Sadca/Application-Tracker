@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginController = exports.createUserController = void 0;
+exports.getUser = exports.loginController = exports.createUserController = void 0;
 const passport_1 = __importDefault(require("passport"));
 const userMethods_1 = require("../models/methods/userMethods");
 const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -20,7 +20,6 @@ const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
         const { username, email, password } = req.body;
         if (username && email && password) {
             const user = { username, email, password };
-            console.log({ user });
             const newUser = yield (0, userMethods_1.createUser)(user);
             const response = {
                 username: newUser === null || newUser === void 0 ? void 0 : newUser.username,
@@ -38,9 +37,7 @@ const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.createUserController = createUserController;
 const loginController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
     passport_1.default.authenticate('local', (err, user, info) => {
-        console.log(user);
         if (err)
             throw err;
         if (!user)
@@ -49,7 +46,6 @@ const loginController = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
             req.logIn(user, (err) => __awaiter(void 0, void 0, void 0, function* () {
                 if (err)
                     throw err;
-                console.log('got to login');
                 const { _id } = req.user;
                 console.log(req.user);
                 req.user = (yield (0, userMethods_1.findUser)(_id));
@@ -59,3 +55,15 @@ const loginController = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     })(req, res, next);
 });
 exports.loginController = loginController;
+const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.user);
+    try {
+        const { id } = req.user;
+        req.user = (yield (0, userMethods_1.findUser)(id));
+        res.status(201).send(req.user);
+    }
+    catch (e) {
+        res.status(400).send(JSON.stringify('Cannot find user'));
+    }
+});
+exports.getUser = getUser;

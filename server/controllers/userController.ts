@@ -9,7 +9,6 @@ export const createUserController = async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
     if (username && email && password) {
       const user = { username, email, password };
-      console.log({ user });
       const newUser = await createUser(user);
       const response = {
         username: newUser?.username,
@@ -29,17 +28,14 @@ export const loginController = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.body);
   passport.authenticate(
     'local',
     (err: Error | null, user: TypeUser | false, info: any) => {
-      console.log(user);
       if (err) throw err;
       if (!user) res.send(JSON.stringify('No User Exists'));
       else {
         req.logIn(user, async (err) => {
           if (err) throw err;
-          console.log('got to login');
           const { _id } = req.user as TypeUser;
           console.log(req.user);
           req.user = (await findUser(_id as ObjectId)) as TypeUser;
@@ -48,4 +44,15 @@ export const loginController = async (
       }
     }
   )(req, res, next);
+};
+
+export const getUser = async (req: Request, res: Response) => {
+  console.log(req.user);
+  try {
+    const { id } = req.user;
+    req.user = (await findUser(id as ObjectId)) as TypeUser;
+    res.status(201).send(req.user);
+  } catch (e) {
+    res.status(400).send(JSON.stringify('Cannot find user'));
+  }
 };

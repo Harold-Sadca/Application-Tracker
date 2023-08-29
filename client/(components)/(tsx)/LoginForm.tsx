@@ -5,6 +5,7 @@ import { TypeLogin } from '@/utils/types';
 import { login } from '@/utils/APIservices';
 import { useDispatch } from 'react-redux';
 import { setLoginState } from '@/redux/features/registerSlice';
+import { loginUser } from '@/redux/features/currentUserSlice';
 
 const initialState = {
   username: '',
@@ -26,7 +27,7 @@ export default function LoginForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = await login(formState);
-    console.log(user);
+    dispatch(loginUser(user));
     setFormState(initialState);
   };
 
@@ -60,7 +61,7 @@ export default function LoginForm() {
           </button>
           <div>
             <p>Or click the button bellow to register</p>
-            <button type='submit' className='btn-1' onClick={handleRegister}>
+            <button type='button' className='btn-1' onClick={handleRegister}>
               Register
             </button>
           </div>

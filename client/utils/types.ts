@@ -8,3 +8,10 @@ export interface TypeRegister {
   password: String;
   email: String;
 }
+
+export interface TypeLoggedInUser {
+  _id: String;
+  username: String;
+  email: String;
+  applications: [];
+}

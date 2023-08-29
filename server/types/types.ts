@@ -5,7 +5,7 @@ export interface TypeUser {
   username: string;
   email: string;
   password: string | null;
-  applications?: [ObjectId];
+  applications?: [ObjectId] | null;
 }
 
 export interface TypeApplication {

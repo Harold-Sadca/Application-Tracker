@@ -25,6 +25,10 @@ input {
   border: none;
 }
 
+.parent-div {
+  width: 100%;
+}
+
 
 ::-webkit-input-placeholder {
   color: rgba(128, 128, 128, 0.65);

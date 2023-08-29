@@ -1,6 +1,6 @@
 'use client';
 
-export default function Home() {
+export default function Applications() {
   return (
     <main>
       <div>

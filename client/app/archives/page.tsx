@@ -1,10 +1,10 @@
 'use client';
 
-export default function Interviews() {
+export default function Archives() {
   return (
     <main>
       <div>
-        <h1 className='header'>Interviews</h1>
+        <h1 className='header'>Archives Page</h1>
       </div>
     </main>
   );
