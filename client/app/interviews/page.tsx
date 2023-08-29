@@ -12,7 +12,10 @@ export default function Interviews() {
   const applications = currentUser.applications;
   return (
     <main className='container'>
-      <h1 className='header'>Interviews</h1>
+      <div className='header-container'>
+        <h1 className='header'>Interviews</h1>{' '}
+        <button className='btn-plus'>+</button>
+      </div>
       <div className='applications-container'>
         {applications.map((app: TypeApplication) => {
           return (

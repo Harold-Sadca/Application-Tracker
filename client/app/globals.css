@@ -45,6 +45,23 @@
   border-radius: 5rem;
 }
 
+.btn-plus {
+  width: 30px;
+  height: 30px;
+  background: var(--secondary-colour);
+  color: var(--text-colour);
+  font-size: large;
+  cursor: pointer;
+  border: 2px solid var(--primary-colour);
+}
+
+.btn-plus:hover {
+  background-color: var(--primary-colour);
+  color: var(--background-colour);
+  border: 2px solid var(--background-colour);
+  transition: ease-in-out 1s;
+}
+
 
 @media (prefers-color-scheme: dark) {
   :root {

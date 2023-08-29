@@ -9,11 +9,13 @@ export default function Applications() {
   const currentUser = useSelector(
     (state: RootState) => state.currentUserReducer.value
   );
-  console.log(currentUser.applications);
-  console.log(currentUser);
   return (
     <main className='container'>
-      <h1 className='header'>Applications Page</h1>
+      <div className='header-container'>
+        <h1 className='header'>Applications</h1>{' '}
+        <button className='btn-plus'>+</button>
+      </div>
+
       <div className='applications-container'>
         {currentUser.applications.map((app: TypeApplication) => (
           <div className='application' key={app._id as unknown as string}>

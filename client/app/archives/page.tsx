@@ -151,7 +151,7 @@ export default function Archives() {
   ];
   return (
     <main className='container'>
-      <h1 className='header'>Applications Page</h1>
+      <h1 className='header'>Applications</h1>
       <div className='applications-container'>
         {archives.map((app) => (
           <div className='application' key={app._id as unknown as string}>
