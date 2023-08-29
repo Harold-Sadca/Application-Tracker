@@ -1,0 +1,34 @@
+.dashboard-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 80%;
+  height: 80vh;
+  margin: auto;
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.container {
+  width: 25%;
+}
+
+.applications-container {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.application {
+  border: 1px solid var(--accent-colour);
+  background-color: var(--background-colour);
+  width: 100%;
+  height: 5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+}
