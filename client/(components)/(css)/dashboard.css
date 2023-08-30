@@ -46,3 +46,17 @@
   justify-self: flex-end;
   align-self: flex-end;
 }
+
+.modal-contents {
+  width: 20rem;
+  height: 20rem;
+}
+
+.modal-content {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
+  margin-top: 3rem;
+}

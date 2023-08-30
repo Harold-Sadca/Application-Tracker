@@ -13,6 +13,16 @@ const initialValue = {
   nextInterview: '',
   status: '',
 };
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 export default function Applications() {
   const currentUser = useSelector(
     (state: RootState) => state.currentUserReducer.value
@@ -31,6 +41,9 @@ export default function Applications() {
     nextInterview: string,
     status: string
   ) => {
+    date = String(new Date(date));
+    nextInterview = String(new Date(nextInterview));
+    console.log(String(date));
     setModalContent({ company, date, nextInterview, status });
     console.log(modalContent);
   };
@@ -62,7 +75,7 @@ export default function Applications() {
         ))}
       </div>
       <button className='btn-1'>View Applications</button>
-      <ReactModal isOpen={showModal}>
+      <ReactModal isOpen={showModal} style={customStyles}>
         <div className='modal-contents'>
           <button
             onClick={() => {
@@ -75,7 +88,7 @@ export default function Applications() {
           <div className='modal-content'>
             <p>Company: {modalContent.company}</p>
             <p>Date Of Application: {modalContent.date}</p>
-            <p>Next Interview{modalContent.nextInterview}</p>
+            <p>Next Interview: {modalContent.nextInterview}</p>
             <p>Application Status: {modalContent.status}</p>
           </div>
         </div>
