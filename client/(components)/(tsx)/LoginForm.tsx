@@ -1,11 +1,11 @@
 'use client';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import '../(css)/loginForm.css';
 import { TypeLogin } from '@/utils/types';
 import { login } from '@/utils/APIservices';
 import { useDispatch } from 'react-redux';
 import { setLoginState } from '@/redux/features/registerSlice';
 import { loginUser } from '@/redux/features/currentUserSlice';
+import '../(css)/loginForm.css';
 
 const initialState = {
   username: '',

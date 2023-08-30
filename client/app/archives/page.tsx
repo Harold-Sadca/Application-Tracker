@@ -151,10 +151,11 @@ export default function Archives() {
   ];
   return (
     <main className='container'>
-      <h1 className='header'>Applications</h1>
+      <h1 className='header'>Archives</h1>
       <div className='applications-container'>
-        {archives.map((app) => (
-          <div className='application' key={app._id as unknown as string}>
+        {archives.map((app, idx) => (
+          <div className='application' key={idx}>
+            {/* <div className='application' key={app._id as unknown as string}> */}
             <p>{app.company}</p>
             <p>{app.status}</p>
           </div>

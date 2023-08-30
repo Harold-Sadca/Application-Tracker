@@ -8,12 +8,8 @@ import { loginUser } from '@/redux/features/currentUserSlice';
 
 export default function Main() {
   const router = useRouter();
-  const dispatch = useDispatch();
   useEffect(() => {
-    getUser().then((res) => {
-      dispatch(loginUser(res));
-      res && router.push('/homepage');
-    });
+    router.push('/homepage');
   }, []);
   return null;
 }
