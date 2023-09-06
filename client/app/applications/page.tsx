@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { TypeApplication } from '../../../server/types/types';
 import ReactModal from 'react-modal';
 import '../../(components)/(css)/dashboard.css';
+import { TypeApplicationResponse } from '@/utils/types';
 
 const initialValue = {
   company: '',
@@ -55,7 +56,7 @@ export default function Applications() {
       </div>
 
       <div className='applications-container'>
-        {currentUser.applications.map((app: TypeApplication) => (
+        {currentUser.applications.map((app: TypeApplicationResponse) => (
           <div
             className='application'
             onClick={() => {
@@ -63,7 +64,7 @@ export default function Applications() {
               handleModalValue(
                 app.company,
                 app.date as unknown as string,
-                app.nextInterview?.date as string,
+                app.nextInterview?.date as unknown as string,
                 app.status
               );
             }}

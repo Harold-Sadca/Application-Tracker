@@ -1,3 +1,5 @@
+import { TypeApplication, TypeInterview } from '../../server/types/types';
+
 export interface TypeLogin {
   username: String;
   password: String;
@@ -14,4 +16,9 @@ export interface TypeLoggedInUser {
   username: String;
   email: String;
   applications: [];
+}
+
+export interface TypeApplicationResponse
+  extends Omit<TypeApplication, 'nextInterview'> {
+  nextInterview: TypeInterview;
 }
