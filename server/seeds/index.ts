@@ -37,6 +37,6 @@ async function main() {
         application2?._id as ObjectId
       );
     }
-    console.log('Database seeding complete.');
+    console.log('Database seeding complete. Disconnecting');
   });
 }
