@@ -38,7 +38,6 @@ export default function Applications() {
     appElement.current = document.body;
     ReactModal.setAppElement(appElement.current);
   }, []);
-  console.log(currentUser.applications);
 
   const handleItemClick = (item: TypeApplicationResponse) => {
     setShowModal(true);
@@ -58,16 +57,14 @@ export default function Applications() {
   ) => {
     date = String(new Date(date));
     nextInterview = String(new Date(nextInterview));
-    console.log(String(date));
     setModalContent({ company, date, nextInterview, status });
-    console.log(modalContent);
   };
 
   return (
     <main className='container'>
       <div className='header-container'>
         <h1 className='header'>Applications</h1>
-        <button className='btn-plus'>+</button>
+        {path == '/dashboard' ? '' : <button className='btn-plus'>+</button>}
       </div>
       <div className='applications-container'>
         {currentUser.applications.map((app: TypeApplicationResponse) => (

@@ -15,7 +15,6 @@ export default function Home() {
 
   const dispatch = useDispatch();
   getUser().then((res) => {
-    console.log(res);
     dispatch(loginUser(res));
 
     if (res) {

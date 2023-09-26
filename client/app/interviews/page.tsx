@@ -52,16 +52,15 @@ export default function Interviews() {
   ) => {
     date = String(new Date(date));
     interviewType;
-    console.log(String(date));
+
     setModalContent({ company, date, interviewType });
-    console.log(modalContent);
   };
 
   return (
     <main className='container'>
       <div className='header-container'>
         <h1 className='header'>Interviews</h1>
-        <button className='btn-plus'>+</button>
+        {path == '/dashboard' ? '' : <button className='btn-plus'>+</button>}
       </div>
       <div className='applications-container'>
         {applications.map((app: TypeApplicationResponse) => (
