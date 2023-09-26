@@ -74,6 +74,7 @@ export default function Applications() {
           <InterviewApplicationItem
             key={app._id as unknown as string}
             item={app}
+            secondItem={null}
             onItemClick={handleItemClick}
           />
         ))}

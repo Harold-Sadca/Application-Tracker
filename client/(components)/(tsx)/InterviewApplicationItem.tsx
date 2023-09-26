@@ -1,13 +1,16 @@
 import React from 'react';
 import { TypeApplicationResponse } from '@/utils/types';
+import { TypeInterview } from '../../../server/types/types';
 
 interface InterviewApplicationItemProps {
   item: TypeApplicationResponse;
+  secondItem: string | null;
   onItemClick: (item: TypeApplicationResponse) => void;
 }
 
 const InterviewApplicationItem: React.FC<InterviewApplicationItemProps> = ({
   item,
+  secondItem,
   onItemClick,
 }) => {
   return (
@@ -18,11 +21,7 @@ const InterviewApplicationItem: React.FC<InterviewApplicationItemProps> = ({
       }}
     >
       <p>{item.company}</p>
-      <p>
-        {item.status
-          ? item.status
-          : (item.nextInterview.date as unknown as string)}
-      </p>
+      <p>{secondItem ? secondItem : item.status}</p>
     </div>
   );
 };
