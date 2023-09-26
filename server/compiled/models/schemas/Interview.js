@@ -13,6 +13,19 @@ const interviewSchema = new Schema({
         type: String,
         enum: ['Passed', 'Failed'],
     },
+    interviewType: {
+        type: String,
+        enum: [
+            'Technical Interviews',
+            'Behavioral Interviews',
+            'System Design Interviews',
+            'Whiteboard Interviews',
+            'Coding Interviews',
+            'Phone Screen Interviews',
+            'Pair Programming Interviews',
+            'Case Study Interviews',
+        ],
+    },
 });
 const Interview = __1.default.model('Interview', interviewSchema);
 exports.default = Interview;

@@ -8,6 +8,17 @@ import { ObjectId } from 'mongodb';
 
 main().catch((err) => console.log(err));
 
+const interviewType = [
+  'Technical Interviews',
+  'Behavioral Interviews',
+  'System Design Interviews',
+  'Whiteboard Interviews',
+  'Coding Interviews',
+  'Phone Screen Interviews',
+  'Pair Programming Interviews',
+  'Case Study Interviews',
+];
+
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/application-tracker', {
     useNewUrlParser: true,
@@ -19,6 +30,7 @@ async function main() {
     db.dropDatabase();
     console.log('Database connected. Starting seeding.');
     for (let i = 0; i < mockUsers.length; i++) {
+      const interview = Math.floor(Math.random() * 8);
       const user = await createUser(mockUsers[i]);
       const application1 = await createApplication(
         mockApplications[i] as TypeApplication,
@@ -29,14 +41,21 @@ async function main() {
         user?._id as unknown as string
       );
       const interview1 = await createInterview(
-        mockInterviews[i] as TypeInterview,
+        {
+          ...mockInterviews[i],
+          interviewType: interviewType[interview],
+        } as TypeInterview,
         application1?._id as ObjectId
       );
       const interview2 = await createInterview(
-        mockInterviews[i + 1] as TypeInterview,
+        {
+          ...mockInterviews[i + 1],
+          interviewType: interviewType[interview + 1],
+        } as TypeInterview,
         application2?._id as ObjectId
       );
     }
     console.log('Database seeding complete. Disconnecting');
+    await mongoose.connection.close();
   });
 }

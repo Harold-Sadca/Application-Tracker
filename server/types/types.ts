@@ -30,4 +30,13 @@ export interface TypeInterview {
   date: Date;
   application: ObjectId;
   result?: 'Passed' | 'Failed';
+  interviewType?:
+    | 'Technical Interviews'
+    | 'Behavioral Interviews'
+    | 'System Design Interviews'
+    | 'Whiteboard Interviews'
+    | 'Coding Interviews'
+    | 'Phone Screen Interviews'
+    | 'Pair Programming Interviews'
+    | 'Case Study Interviews';
 }
