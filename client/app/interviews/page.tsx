@@ -12,8 +12,7 @@ import ReactModal from 'react-modal';
 const initialValue = {
   company: '',
   date: '',
-  nextInterview: '',
-  status: '',
+  interviewType: '',
 };
 
 const customStyles = {
@@ -42,21 +41,19 @@ export default function Interviews() {
     handleModalValue(
       item.company,
       item.date as unknown as string,
-      item.nextInterview?.date as unknown as string,
-      item.status
+      item.nextInterview?.interviewType as string
     );
   };
 
   const handleModalValue = (
     company: string,
     date: string,
-    nextInterview: string,
-    status: string
+    interviewType: string
   ) => {
     date = String(new Date(date));
-    nextInterview = String(new Date(nextInterview));
+    interviewType;
     console.log(String(date));
-    setModalContent({ company, date, nextInterview, status });
+    setModalContent({ company, date, interviewType });
     console.log(modalContent);
   };
 
@@ -98,8 +95,7 @@ export default function Interviews() {
           <div className='modal-content'>
             <p>Company: {modalContent.company}</p>
             <p>Date Of Application: {modalContent.date}</p>
-            <p>Next Interview: {modalContent.nextInterview}</p>
-            <p>Application Status: {modalContent.status}</p>
+            <p>Next Interview: {modalContent.interviewType}</p>
           </div>
         </div>
       </ReactModal>

@@ -48,6 +48,7 @@ function main() {
                 const interview2 = yield (0, interviewMethods_1.createInterview)(Object.assign(Object.assign({}, dataHelper_1.mockInterviews[i + 1]), { interviewType: interviewType[interview + 1] }), application2 === null || application2 === void 0 ? void 0 : application2._id);
             }
             console.log('Database seeding complete. Disconnecting');
+            yield mongoose_1.default.connection.close();
         }));
     });
 }
