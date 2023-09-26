@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import { ReduxProvider } from '@/redux/provider';
+import Navbar from '@/(components)/(tsx)/Navbar';
+import Layout from '@/(components)/(tsx)/Layout';
 
 const inter = Open_Sans({ weight: '400', subsets: ['latin'] });
 
@@ -18,6 +20,8 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
+        <Navbar />
+        {/* <Layout children = {children} /> */}
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

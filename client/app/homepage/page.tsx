@@ -15,9 +15,10 @@ export default function Home() {
 
   const dispatch = useDispatch();
   getUser().then((res) => {
+    console.log(res);
     dispatch(loginUser(res));
 
-    if (res.username) {
+    if (res) {
       router.push('/dashboard');
       return null;
     }
@@ -27,7 +28,6 @@ export default function Home() {
   return (
     <main>
       <div className='main-body'>
-        <h1 className='header'>Homepage</h1>
         <div>{register ? <RegisterForm /> : <LoginForm />}</div>
       </div>
     </main>

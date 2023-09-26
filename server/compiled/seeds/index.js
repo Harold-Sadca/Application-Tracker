@@ -36,7 +36,7 @@ function main() {
                 const interview1 = yield (0, interviewMethods_1.createInterview)(dataHelper_1.mockInterviews[i], application1 === null || application1 === void 0 ? void 0 : application1._id);
                 const interview2 = yield (0, interviewMethods_1.createInterview)(dataHelper_1.mockInterviews[i + 1], application2 === null || application2 === void 0 ? void 0 : application2._id);
             }
-            console.log('Database seeding complete.');
+            console.log('Database seeding complete. Disconnecting');
         }));
     });
 }
