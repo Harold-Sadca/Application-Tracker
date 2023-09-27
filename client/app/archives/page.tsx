@@ -5,7 +5,7 @@ import '../../(components)/(css)/dashboard.css';
 import { TypeApplication } from '../../../server/types/types';
 import { RootState } from '@/redux/store';
 import { getUser } from '@/utils/APIservices';
-import { TypeLoggedInUser } from '@/utils/types';
+import { TypeApplicationResponse, TypeLoggedInUser } from '@/utils/types';
 import { loginUser } from '@/redux/features/currentUserSlice';
 import { setApplications } from '@/redux/features/applicationsSlice';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -17,22 +17,11 @@ export default function Archives() {
     (state: RootState) => state.currentUserReducer.value
   );
 
-  const [rejected, setRejected] = useState<TypeApplication[]>([]);
-  const [loaded, setLoaded] = useState<boolean>(false);
   useEffect(() => {
     if (!currentUser._id) {
       getUser().then((res: TypeLoggedInUser) => {
         dispatch(loginUser(res));
         dispatch(setApplications(res.applications));
-
-        const rejectedApplications = res.applications.filter(
-          (item: TypeApplication) => {
-            return item.status === 'Rejected';
-          }
-        );
-
-        setRejected(rejectedApplications);
-        setLoaded(true);
       });
     }
   }, []);
@@ -41,17 +30,13 @@ export default function Archives() {
     <main className='container'>
       <h1 className='header'>Archives</h1>
       <div className='applications-container'>
-        {loaded ? (
-          rejected.map((app) => (
+        {currentUser.applications.map((app: TypeApplicationResponse) =>
+          app.status == 'Rejected' ? (
             <div className='application' key={app._id as unknown as string}>
               <p>{app.company}</p>
               <p>{app.status}</p>
             </div>
-          ))
-        ) : (
-          <Box sx={{ display: 'flex' }}>
-            <CircularProgress />
-          </Box>
+          ) : null
         )}
       </div>
       <button className='btn-1'>View Archives</button>

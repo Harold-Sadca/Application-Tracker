@@ -84,14 +84,16 @@ export default function Applications() {
         )}
       </div>
       <div className='applications-container'>
-        {currentUser.applications.map((app: TypeApplicationResponse) => (
-          <InterviewApplicationItem
-            key={app._id as unknown as string}
-            item={app}
-            secondItem={null}
-            onItemClick={handleItemClick}
-          />
-        ))}
+        {currentUser.applications.map((app: TypeApplicationResponse) =>
+          app.status != 'Rejected' ? (
+            <InterviewApplicationItem
+              key={app._id as unknown as string}
+              item={app}
+              secondItem={null}
+              onItemClick={handleItemClick}
+            />
+          ) : null
+        )}
       </div>
       {path == '/dashboard' ? (
         <button className='btn-1' onClick={() => router.push('/applications')}>
