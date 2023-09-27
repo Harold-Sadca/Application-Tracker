@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { TypeLogin, TypeRegister } from './types';
+import { TypeApplication } from '../../server/types/types';
 
 const PORT = process.env.PORT || 'http://localhost:3001';
 
@@ -45,4 +46,22 @@ async function getUser() {
     .catch((error) => error.response.data.error);
 }
 
-export { login, register, getUser };
+async function addApplication(application: TypeApplication, user_id: string) {
+  return axios
+    .post(
+      PORT + '/application/create/' + user_id,
+      JSON.stringify(application),
+      {
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        withCredentials: true,
+      }
+    )
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => error.response.data.error);
+}
+
+export { login, register, getUser, addApplication };

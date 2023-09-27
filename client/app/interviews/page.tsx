@@ -55,6 +55,7 @@ export default function Interviews() {
 
     setModalContent({ company, date, interviewType });
   };
+  console.log(applications);
 
   return (
     <main className='container'>
@@ -63,14 +64,16 @@ export default function Interviews() {
         {path == '/dashboard' ? '' : <button className='btn-plus'>+</button>}
       </div>
       <div className='applications-container'>
-        {applications.map((app: TypeApplicationResponse) => (
-          <InterviewApplicationItem
-            key={app._id as unknown as string}
-            item={app}
-            secondItem={app.nextInterview.date as unknown as string}
-            onItemClick={handleItemClick}
-          />
-        ))}
+        {applications.map((app: TypeApplicationResponse) =>
+          app.nextInterview ? (
+            <InterviewApplicationItem
+              key={app._id as unknown as string}
+              item={app}
+              secondItem={app.nextInterview.date as unknown as string}
+              onItemClick={handleItemClick}
+            />
+          ) : null
+        )}
       </div>
       {path == '/dashboard' ? (
         <button className='btn-1' onClick={() => router.push('/interviews')}>

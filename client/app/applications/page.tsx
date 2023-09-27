@@ -8,6 +8,7 @@ import { TypeApplicationResponse } from '@/utils/types';
 import { usePathname, useRouter } from 'next/navigation';
 import InterviewApplicationItem from '@/(components)/(tsx)/InterviewApplicationItem';
 import '../../(components)/(css)/dashboard.css';
+import ApplicationForm from '@/(components)/(tsx)/ApplicationForm';
 
 const initialValue = {
   company: '',
@@ -33,6 +34,7 @@ export default function Applications() {
   const router = useRouter();
   const [modalContent, setModalContent] = useState(initialValue);
   const [showModal, setShowModal] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const appElement = useRef<HTMLElement | null>(null);
   useEffect(() => {
     appElement.current = document.body;
@@ -64,7 +66,18 @@ export default function Applications() {
     <main className='container'>
       <div className='header-container'>
         <h1 className='header'>Applications</h1>
-        {path == '/dashboard' ? '' : <button className='btn-plus'>+</button>}
+        {path == '/dashboard' ? (
+          ''
+        ) : (
+          <button
+            className='btn-plus'
+            onClick={() => {
+              setShowForm(true);
+            }}
+          >
+            +
+          </button>
+        )}
       </div>
       <div className='applications-container'>
         {currentUser.applications.map((app: TypeApplicationResponse) => (
@@ -101,6 +114,19 @@ export default function Applications() {
             <p>Next Interview: {modalContent.nextInterview}</p>
             <p>Application Status: {modalContent.status}</p>
           </div>
+        </div>
+      </ReactModal>
+      <ReactModal isOpen={showForm} style={customStyles}>
+        <div className='modal-form'>
+          <button
+            onClick={() => {
+              setShowForm(false);
+            }}
+            className='btn-plus'
+          >
+            X
+          </button>
+          <ApplicationForm />
         </div>
       </ReactModal>
     </main>

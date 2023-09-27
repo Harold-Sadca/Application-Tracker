@@ -47,6 +47,10 @@
   align-self: flex-end;
 }
 
+.modal-form {
+  width: 30rem;
+  height: 30rem;
+}
 .modal-contents {
   width: 20rem;
   height: 20rem;
