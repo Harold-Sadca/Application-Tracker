@@ -44,6 +44,7 @@ export default function Applications() {
 
   const handleItemClick = (item: TypeApplicationResponse) => {
     setShowModal(true);
+    console.log(item.nextInterview?.date);
     handleModalValue(
       item.company,
       item.date as unknown as string,
@@ -59,9 +60,11 @@ export default function Applications() {
     status: string
   ) => {
     date = String(new Date(date));
-    nextInterview = String(new Date(nextInterview));
+    nextInterview = nextInterview ? String(new Date(nextInterview)) : '';
     setModalContent({ company, date, nextInterview, status });
   };
+
+  console.log(currentUser.applications);
 
   return (
     <main className='container'>
@@ -112,7 +115,12 @@ export default function Applications() {
           <div className='modal-content'>
             <p>Company: {modalContent.company}</p>
             <p>Date Of Application: {formatDate(modalContent.date)}</p>
-            <p>Next Interview: {formatDate(modalContent.nextInterview)}</p>
+            <p>
+              Next Interview:{' '}
+              {modalContent.nextInterview
+                ? formatDate(modalContent.nextInterview)
+                : 'No Interview Scheduled'}
+            </p>
             <p>Application Status: {modalContent.status}</p>
           </div>
         </div>
