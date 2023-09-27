@@ -7,8 +7,6 @@ import '../../(components)/(css)/dashboard.css';
 import { useParams } from 'next/navigation';
 
 export default function Dashboard() {
-  const params = useParams();
-
   return (
     <main>
       <div className='main-body'>

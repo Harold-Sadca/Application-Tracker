@@ -7,6 +7,8 @@ import { RootState } from '@/redux/store';
 import { loginUser } from '@/redux/features/currentUserSlice';
 import { useDispatch } from 'react-redux';
 import { getUser } from '@/utils/APIservices';
+import { setApplications } from '@/redux/features/applicationsSlice';
+import { TypeLoggedInUser } from '@/utils/types';
 
 export default function Home() {
   const register = useSelector(
@@ -14,8 +16,10 @@ export default function Home() {
   );
 
   const dispatch = useDispatch();
-  getUser().then((res) => {
+  getUser().then((res: TypeLoggedInUser) => {
     dispatch(loginUser(res));
+    dispatch(setApplications(res.applications));
+    localStorage.setItem('currentUserId', res._id);
 
     if (res) {
       router.push('/dashboard');

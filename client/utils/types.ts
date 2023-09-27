@@ -1,20 +1,20 @@
 import { TypeApplication, TypeInterview } from '../../server/types/types';
 
 export interface TypeLogin {
-  username: String;
-  password: String;
+  username: string;
+  password: string;
 }
 
 export interface TypeRegister {
-  username: String;
-  password: String;
-  email: String;
+  username: string;
+  password: string;
+  email: string;
 }
 
 export interface TypeLoggedInUser {
-  _id: String;
-  username: String;
-  email: String;
+  _id: string;
+  username: string;
+  email: string;
   applications: [];
 }
 
