@@ -8,6 +8,7 @@ import { TypeApplicationResponse } from '@/utils/types';
 import { usePathname, useRouter } from 'next/navigation';
 import InterviewApplicationItem from '@/(components)/(tsx)/InterviewApplicationItem';
 import ReactModal from 'react-modal';
+import { formatDate } from '@/utils/utilts';
 
 const initialValue = {
   company: '',
@@ -96,8 +97,8 @@ export default function Interviews() {
           </button>
           <div className='modal-content'>
             <p>Company: {modalContent.company}</p>
-            <p>Date Of Application: {modalContent.date}</p>
-            <p>Next Interview: {modalContent.interviewType}</p>
+            <p>Interview Date: {formatDate(modalContent.date)}</p>
+            <p>Interview Type: {modalContent.interviewType}</p>
           </div>
         </div>
       </ReactModal>

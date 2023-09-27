@@ -1,6 +1,7 @@
 import React from 'react';
 import { TypeApplicationResponse } from '@/utils/types';
 import { TypeInterview } from '../../../server/types/types';
+import { formatDate } from '@/utils/utilts';
 
 interface InterviewApplicationItemProps {
   item: TypeApplicationResponse;
@@ -21,7 +22,7 @@ const InterviewApplicationItem: React.FC<InterviewApplicationItemProps> = ({
       }}
     >
       <p>{item.company}</p>
-      <p>{secondItem ? secondItem : item.status}</p>
+      <p>{secondItem ? formatDate(secondItem) : item.status}</p>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import InterviewApplicationItem from '@/(components)/(tsx)/InterviewApplicationItem';
 import '../../(components)/(css)/dashboard.css';
 import ApplicationForm from '@/(components)/(tsx)/ApplicationForm';
+import { formatDate } from '@/utils/utilts';
 
 const initialValue = {
   company: '',
@@ -110,8 +111,8 @@ export default function Applications() {
           </button>
           <div className='modal-content'>
             <p>Company: {modalContent.company}</p>
-            <p>Date Of Application: {modalContent.date}</p>
-            <p>Next Interview: {modalContent.nextInterview}</p>
+            <p>Date Of Application: {formatDate(modalContent.date)}</p>
+            <p>Next Interview: {formatDate(modalContent.nextInterview)}</p>
             <p>Application Status: {modalContent.status}</p>
           </div>
         </div>
