@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, FormEvent, useRef } from 'react';
+import React, { useState, FormEvent, useRef, ChangeEvent } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import '../(css)/applicationForm.css';
@@ -15,56 +15,54 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { addApplication } from '@/utils/APIservices';
 import { TypeApplication } from '../../../server/types/types';
+import { generateTimeSlots, interviewTypes } from '@/utils/utils';
 
-const status = [
-  'To Apply',
-  'Applied',
-  'Interview Scheduled',
-  'Interviewing',
-  'Offer Received',
-  'Offer Rejected',
-  'Rejected',
-];
+interface InterviewApplicationItemProps {
+  applicationId: string;
+}
 
-export default function ApplicationForm() {
+const initialValue = {
+  SelectedTime: '',
+  InterviewType: '',
+};
+
+const InterviewForm: React.FC<InterviewApplicationItemProps> = ({
+  applicationId,
+}) => {
+  const times = generateTimeSlots();
+  const types = interviewTypes;
   const formRef = useRef<HTMLFormElement | null>(null);
-  const currentUser = useSelector(
-    (state: RootState) => state.currentUserReducer.value
-  );
   const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [selectedStatus, setSelectedStatus] = useState('');
+  const [interviewDetails, setInterviewDetails] = useState(initialValue);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const newApplication = {
-      company: formData.getAll('company').join(''),
+    const newInterview = {
       date: startDate,
-      status: selectedStatus,
-    } as TypeApplication;
-    const application = await addApplication(
-      newApplication,
-      currentUser._id as string
-    );
-    if (application) {
-      formRef.current?.reset();
-      setSelectedStatus('');
-    }
+      time: interviewDetails.SelectedTime,
+      interviewType: interviewDetails.InterviewType,
+    };
+    console.log(newInterview);
+    // const interview = await addInterview(
+    //   newInterview,
+    //   currentUser._id as string
+    // );
+    // if (interview) {
+    //   formRef.current?.reset();
+    //   setSelectedTime('');
+    // }
   }
 
-  const handleStatusChange = (e: any) => {
-    setSelectedStatus(e.target.value);
+  const handleChangeChange = (e: SelectChangeEvent<string>) => {
+    setInterviewDetails({
+      ...interviewDetails,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
     <form onSubmit={onSubmit} ref={formRef} className='application-form'>
-      <input
-        type='text'
-        className='application-content'
-        placeholder='Company name'
-        name='company'
-        required
-      />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           onChange={(date) => setStartDate(date as Date)}
@@ -73,20 +71,40 @@ export default function ApplicationForm() {
       </LocalizationProvider>
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
-          <InputLabel id='demo-simple-select-label'>
-            Select Application Status
-          </InputLabel>
+          <InputLabel id='demo-simple-select-label'>Time</InputLabel>
           <Select
             labelId='demo-simple-select-label'
             id='demo-simple-select'
-            value={selectedStatus}
-            label='Select Application Status'
-            onChange={handleStatusChange}
+            value={interviewDetails.SelectedTime}
+            label='Select Application Time'
+            name='SelectedTime'
+            onChange={handleChangeChange}
           >
-            {status.map((stat, idx) => {
+            {times.map((time, idx) => {
               return (
-                <MenuItem key={idx} value={stat}>
-                  {stat}
+                <MenuItem key={idx} value={time}>
+                  {time}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+      </Box>
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl fullWidth>
+          <InputLabel id='demo-simple-select-label'>Interview Type</InputLabel>
+          <Select
+            labelId='demo-simple-select-label'
+            id='demo-simple-select'
+            value={interviewDetails.InterviewType}
+            label='Select Interview Type'
+            name='InterviewType'
+            onChange={handleChangeChange}
+          >
+            {types.map((type, idx) => {
+              return (
+                <MenuItem key={idx} value={type}>
+                  {type}
                 </MenuItem>
               );
             })}
@@ -98,4 +116,6 @@ export default function ApplicationForm() {
       </button>
     </form>
   );
-}
+};
+
+export default InterviewForm;

@@ -12,9 +12,9 @@ export const createInterviewController = async (
 ) => {
   try {
     const id = req.params as unknown as ObjectId;
-    const { date, time } = req.body;
-    if (id && date && time) {
-      const interview = { date, time };
+    const { date, time, interviewType } = req.body;
+    if (id && date && time && interviewType) {
+      const interview = { date, time, interviewType };
       const newInterview = await createInterview(interview, id);
       res.status(201).send(newInterview);
     } else {

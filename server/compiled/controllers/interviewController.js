@@ -14,9 +14,9 @@ const interviewMethods_1 = require("../models/methods/interviewMethods");
 const createInterviewController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params;
-        const { date, time } = req.body;
-        if (id && date && time) {
-            const interview = { date, time };
+        const { date, time, interviewType } = req.body;
+        if (id && date && time && interviewType) {
+            const interview = { date, time, interviewType };
             const newInterview = yield (0, interviewMethods_1.createInterview)(interview, id);
             res.status(201).send(newInterview);
         }

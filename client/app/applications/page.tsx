@@ -10,6 +10,7 @@ import InterviewApplicationItem from '@/(components)/(tsx)/InterviewApplicationI
 import '../../(components)/(css)/dashboard.css';
 import ApplicationForm from '@/(components)/(tsx)/ApplicationForm';
 import { formatDate, generateTimeSlots } from '@/utils/utils';
+import InterviewForm from '@/(components)/(tsx)/InterviewForm';
 
 const initialValue = {
   company: '',
@@ -33,6 +34,7 @@ export default function Applications() {
   );
   const path = usePathname();
   const router = useRouter();
+  const [applicationId, setApplicationId] = useState('');
   const [modalContent, setModalContent] = useState(initialValue);
   const [showModal, setShowModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -43,12 +45,10 @@ export default function Applications() {
     ReactModal.setAppElement(appElement.current);
   }, []);
 
-  const timeSlotsArray = generateTimeSlots();
-  console.log(timeSlotsArray);
-
   const handleItemClick = (item: TypeApplicationResponse) => {
+    setApplicationId(item._id as unknown as string);
     setShowModal(true);
-    console.log(item.nextInterview?.date);
+    console.log(applicationId);
     handleModalValue(
       item.company,
       item.date as unknown as string,
@@ -127,7 +127,15 @@ export default function Applications() {
             </p>
             <p>Application Status: {modalContent.status}</p>
           </div>
-          <button className='btn-1'>Schedule An Interview</button>
+          <button
+            className='btn-1'
+            onClick={() => {
+              setShowModal(false);
+              setShowInterviewForm(true);
+            }}
+          >
+            Schedule An Interview
+          </button>
         </div>
       </ReactModal>
       <ReactModal isOpen={showForm} style={customStyles}>
@@ -141,6 +149,19 @@ export default function Applications() {
             X
           </button>
           <ApplicationForm />
+        </div>
+      </ReactModal>
+      <ReactModal isOpen={showInterviewForm} style={customStyles}>
+        <div className='modal-form'>
+          <button
+            onClick={() => {
+              setShowInterviewForm(false);
+            }}
+            className='btn-plus'
+          >
+            X
+          </button>
+          <InterviewForm applicationId={applicationId} />
         </div>
       </ReactModal>
     </main>
