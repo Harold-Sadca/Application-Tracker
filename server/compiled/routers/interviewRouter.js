@@ -4,7 +4,7 @@ const express_1 = require("express");
 const interviewController_1 = require("../controllers/interviewController");
 const authMiddleware_1 = require("../utils/authMiddleware");
 const interviewRouter = (0, express_1.Router)();
-interviewRouter.post('/create', authMiddleware_1.authenticate, interviewController_1.createInterviewController);
+interviewRouter.post('/create/:application_id', authMiddleware_1.authenticate, interviewController_1.createInterviewController);
 interviewRouter.get('/get/:id', authMiddleware_1.authenticate, interviewController_1.getInterviewController);
 interviewRouter.put('/update/:id', authMiddleware_1.authenticate, interviewController_1.updateInterviewController);
 exports.default = interviewRouter;

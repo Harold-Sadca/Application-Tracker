@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { TypeLogin, TypeRegister } from './types';
-import { TypeApplication } from '../../server/types/types';
+import { TypeApplication, TypeInterview } from '../../server/types/types';
 
 const PORT = process.env.PORT || 'http://localhost:3001';
 
@@ -64,4 +64,22 @@ async function addApplication(application: TypeApplication, user_id: string) {
     .catch((error) => error.response.data.error);
 }
 
-export { login, register, getUser, addApplication };
+async function addInterview(interview: TypeInterview, application_id: string) {
+  return axios
+    .post(
+      PORT + '/interview/create/' + application_id,
+      JSON.stringify(interview),
+      {
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        withCredentials: true,
+      }
+    )
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => error.response.data.error);
+}
+
+export { login, register, getUser, addApplication, addInterview };

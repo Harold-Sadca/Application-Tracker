@@ -11,11 +11,15 @@ export const createInterviewController = async (
   res: Response
 ) => {
   try {
-    const id = req.params as unknown as ObjectId;
+    const { application_id } = req.params;
+    console.log(application_id);
     const { date, time, interviewType } = req.body;
-    if (id && date && time && interviewType) {
+    if (application_id && date && time && interviewType) {
       const interview = { date, time, interviewType };
-      const newInterview = await createInterview(interview, id);
+      const newInterview = await createInterview(
+        interview,
+        application_id as unknown as ObjectId
+      );
       res.status(201).send(newInterview);
     } else {
       res.status(400).send(JSON.stringify('Missing Some Information.'));

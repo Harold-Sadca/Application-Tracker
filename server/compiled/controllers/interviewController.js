@@ -13,11 +13,12 @@ exports.updateInterviewController = exports.getInterviewController = exports.cre
 const interviewMethods_1 = require("../models/methods/interviewMethods");
 const createInterviewController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params;
+        const { application_id } = req.params;
+        console.log(application_id);
         const { date, time, interviewType } = req.body;
-        if (id && date && time && interviewType) {
+        if (application_id && date && time && interviewType) {
             const interview = { date, time, interviewType };
-            const newInterview = yield (0, interviewMethods_1.createInterview)(interview, id);
+            const newInterview = yield (0, interviewMethods_1.createInterview)(interview, application_id);
             res.status(201).send(newInterview);
         }
         else {

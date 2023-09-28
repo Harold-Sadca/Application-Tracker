@@ -13,8 +13,8 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import '../(css)/applicationForm.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { addApplication } from '@/utils/APIservices';
-import { TypeApplication } from '../../../server/types/types';
+import { addApplication, addInterview } from '@/utils/APIservices';
+import { TypeApplication, TypeInterview } from '../../../server/types/types';
 import { generateTimeSlots, interviewTypes } from '@/utils/utils';
 
 interface InterviewApplicationItemProps {
@@ -42,16 +42,11 @@ const InterviewForm: React.FC<InterviewApplicationItemProps> = ({
       date: startDate,
       time: interviewDetails.SelectedTime,
       interviewType: interviewDetails.InterviewType,
-    };
-    console.log(newInterview);
-    // const interview = await addInterview(
-    //   newInterview,
-    //   currentUser._id as string
-    // );
-    // if (interview) {
-    //   formRef.current?.reset();
-    //   setSelectedTime('');
-    // }
+    } as TypeInterview;
+    const interview = await addInterview(newInterview, applicationId);
+    if (interview) {
+      setInterviewDetails(initialValue);
+    }
   }
 
   const handleChangeChange = (e: SelectChangeEvent<string>) => {
