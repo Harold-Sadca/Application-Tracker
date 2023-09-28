@@ -8,7 +8,7 @@ import { TypeApplicationResponse } from '@/utils/types';
 import { usePathname, useRouter } from 'next/navigation';
 import InterviewApplicationItem from '@/(components)/(tsx)/InterviewApplicationItem';
 import ReactModal from 'react-modal';
-import { formatDate } from '@/utils/utilts';
+import { formatDate } from '@/utils/utils';
 
 const initialValue = {
   company: '',

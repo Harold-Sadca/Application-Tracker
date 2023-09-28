@@ -9,7 +9,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import InterviewApplicationItem from '@/(components)/(tsx)/InterviewApplicationItem';
 import '../../(components)/(css)/dashboard.css';
 import ApplicationForm from '@/(components)/(tsx)/ApplicationForm';
-import { formatDate } from '@/utils/utilts';
+import { formatDate, generateTimeSlots } from '@/utils/utils';
 
 const initialValue = {
   company: '',
@@ -36,11 +36,15 @@ export default function Applications() {
   const [modalContent, setModalContent] = useState(initialValue);
   const [showModal, setShowModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [showInterviewForm, setShowInterviewForm] = useState(false);
   const appElement = useRef<HTMLElement | null>(null);
   useEffect(() => {
     appElement.current = document.body;
     ReactModal.setAppElement(appElement.current);
   }, []);
+
+  const timeSlotsArray = generateTimeSlots();
+  console.log(timeSlotsArray);
 
   const handleItemClick = (item: TypeApplicationResponse) => {
     setShowModal(true);
@@ -63,8 +67,6 @@ export default function Applications() {
     nextInterview = nextInterview ? String(new Date(nextInterview)) : '';
     setModalContent({ company, date, nextInterview, status });
   };
-
-  console.log(currentUser.applications);
 
   return (
     <main className='container'>
@@ -125,6 +127,7 @@ export default function Applications() {
             </p>
             <p>Application Status: {modalContent.status}</p>
           </div>
+          <button className='btn-1'>Schedule An Interview</button>
         </div>
       </ReactModal>
       <ReactModal isOpen={showForm} style={customStyles}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TypeApplicationResponse } from '@/utils/types';
 import { TypeInterview } from '../../../server/types/types';
-import { formatDate } from '@/utils/utilts';
+import { formatDate } from '@/utils/utils';
 
 interface InterviewApplicationItemProps {
   item: TypeApplicationResponse;
