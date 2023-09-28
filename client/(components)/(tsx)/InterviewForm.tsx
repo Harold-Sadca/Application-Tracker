@@ -37,7 +37,6 @@ const InterviewForm: React.FC<InterviewApplicationItemProps> = ({
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
     const newInterview = {
       date: startDate,
       time: interviewDetails.SelectedTime,
@@ -106,7 +105,7 @@ const InterviewForm: React.FC<InterviewApplicationItemProps> = ({
           </Select>
         </FormControl>
       </Box>
-      <button type='submit' className='btn-1'>
+      <button type='submit' className='btn-submit'>
         Submit
       </button>
     </form>

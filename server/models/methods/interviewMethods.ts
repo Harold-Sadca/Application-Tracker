@@ -9,9 +9,7 @@ export const createInterview = async (
 ) => {
   try {
     const newInterview = new Interview(interview);
-    console.log(id);
     const application = await Application.findById(id);
-    console.log(application);
     newInterview.application = id;
     application!.nextInterview = newInterview._id;
     await application?.save();

@@ -128,7 +128,7 @@ export default function Applications() {
             <p>Application Status: {modalContent.status}</p>
           </div>
           <button
-            className='btn-1'
+            className='btn-2'
             onClick={() => {
               setShowModal(false);
               setShowInterviewForm(true);
