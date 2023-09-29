@@ -11,6 +11,7 @@ import '../../(components)/(css)/dashboard.css';
 import ApplicationForm from '@/(components)/(tsx)/ApplicationForm';
 import { formatDate, generateTimeSlots } from '@/utils/utils';
 import InterviewForm from '@/(components)/(tsx)/InterviewForm';
+import { updateApplicationStatus } from '@/utils/APIservices';
 
 const initialValue = {
   company: '',
@@ -48,7 +49,6 @@ export default function Applications() {
   const handleItemClick = (item: TypeApplicationResponse) => {
     setApplicationId(item._id as unknown as string);
     setShowModal(true);
-    console.log(applicationId);
     handleModalValue(
       item.company,
       item.date as unknown as string,
@@ -66,6 +66,15 @@ export default function Applications() {
     date = String(new Date(date));
     nextInterview = nextInterview ? String(new Date(nextInterview)) : '';
     setModalContent({ company, date, nextInterview, status });
+  };
+
+  const handleApply = async () => {
+    const application = { date: new Date(Date.now()), status: 'Applied' };
+    const updatedApplication = await updateApplicationStatus(
+      application,
+      applicationId
+    );
+    console.log(updatedApplication);
   };
 
   return (
@@ -127,15 +136,21 @@ export default function Applications() {
             </p>
             <p>Application Status: {modalContent.status}</p>
           </div>
-          <button
-            className='btn-2'
-            onClick={() => {
-              setShowModal(false);
-              setShowInterviewForm(true);
-            }}
-          >
-            Schedule An Interview
-          </button>
+          {modalContent.status == 'To Apply' ? (
+            <button className='btn-2' onClick={handleApply}>
+              Apply
+            </button>
+          ) : (
+            <button
+              className='btn-2'
+              onClick={() => {
+                setShowModal(false);
+                setShowInterviewForm(true);
+              }}
+            >
+              Schedule An Interview
+            </button>
+          )}
         </div>
       </ReactModal>
       <ReactModal isOpen={showForm} style={customStyles}>

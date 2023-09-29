@@ -34,7 +34,7 @@ export const getApplication = async (id: string) => {
 
 export const updateApplication = async (
   id: string,
-  application: TypeApplication
+  application: Partial<TypeApplication>
 ) => {
   try {
     const updatedApplication = await Application.findByIdAndUpdate(id, {

@@ -22,6 +22,7 @@ const initialValue = {
   date: '',
   interviewType: '',
   interviewId: '',
+  time: '',
 };
 
 const customStyles = {
@@ -52,7 +53,8 @@ export default function Interviews() {
       item.company,
       item.date as unknown as string,
       item.nextInterview?.interviewType as string,
-      item.nextInterview?._id as unknown as string
+      item.nextInterview?._id as unknown as string,
+      item.nextInterview?.time
     );
   };
 
@@ -60,12 +62,13 @@ export default function Interviews() {
     company: string,
     date: string,
     interviewType: string,
-    interviewId: string
+    interviewId: string,
+    time: string
   ) => {
     date = String(new Date(date));
     interviewType;
     interviewId;
-    setModalContent({ company, date, interviewType, interviewId });
+    setModalContent({ company, date, interviewType, interviewId, time });
   };
 
   const handleUpdate = async (interviewId: string) => {
@@ -89,11 +92,14 @@ export default function Interviews() {
       </div>
       <div className='applications-container'>
         {applications.map((app: TypeApplicationResponse) =>
-          app.nextInterview ? (
+          app.nextInterview && !app.nextInterview.result ? (
             <InterviewApplicationItem
               key={app._id as unknown as string}
               item={app}
-              secondItem={app.nextInterview.date as unknown as string}
+              secondItem={{
+                date: app.nextInterview.date as unknown as string,
+                time: app.nextInterview.time,
+              }}
               onItemClick={handleItemClick}
             />
           ) : null
@@ -121,6 +127,7 @@ export default function Interviews() {
           <div className='modal-content'>
             <p>Company: {modalContent.company}</p>
             <p>Interview Date: {formatDate(modalContent.date)}</p>
+            <p>Time: {modalContent.time}</p>
             <p>Interview Type: {modalContent.interviewType}</p>
           </div>
           <div className='main-body'>

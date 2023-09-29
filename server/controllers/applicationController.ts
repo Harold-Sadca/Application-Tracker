@@ -40,9 +40,9 @@ export const updateApplicationController = async (
 ) => {
   try {
     const { id } = req.params;
-    const { company, date, status } = req.body;
-    if (company && date && status && id) {
-      const application = { company, date, status };
+    const { date, status } = req.body;
+    if (date && status && id) {
+      const application = { date, status };
       const updatedApplication = await updateApplication(id, application);
       res.status(201).send(updatedApplication);
     } else {

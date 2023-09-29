@@ -26,6 +26,10 @@
 .application {
   border: 1px solid var(--accent-colour);
   background-color: var(--background-colour);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 5rem;
   padding: 1rem;

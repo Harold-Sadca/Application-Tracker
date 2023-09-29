@@ -31,7 +31,6 @@ export const getInterview = async (id: string) => {
 
 export const updateInterview = async (id: string, interviewResult: string) => {
   try {
-    const int = await Interview.findById(id);
     const updatedInterview = await Interview.findByIdAndUpdate(id, {
       result: interviewResult,
     });

@@ -43,9 +43,9 @@ exports.getApplicationController = getApplicationController;
 const updateApplicationController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const { company, date, status } = req.body;
-        if (company && date && status && id) {
-            const application = { company, date, status };
+        const { date, status } = req.body;
+        if (date && status && id) {
+            const application = { date, status };
             const updatedApplication = yield (0, applicationMethods_1.updateApplication)(id, application);
             res.status(201).send(updatedApplication);
         }

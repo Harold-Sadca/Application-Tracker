@@ -42,7 +42,6 @@ const getInterview = (id) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getInterview = getInterview;
 const updateInterview = (id, interviewResult) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const int = yield Interview_1.default.findById(id);
         const updatedInterview = yield Interview_1.default.findByIdAndUpdate(id, {
             result: interviewResult,
         });
