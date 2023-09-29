@@ -2,6 +2,7 @@ import { ObjectId } from 'mongodb';
 
 export interface TypeUser {
   _id?: ObjectId;
+  id?: ObjectId;
   username: string;
   email: string;
   password: string | null;

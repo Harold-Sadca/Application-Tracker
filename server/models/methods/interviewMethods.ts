@@ -29,11 +29,17 @@ export const getInterview = async (id: string) => {
   }
 };
 
-export const updateInterview = async (id: string, interview: TypeInterview) => {
+export const updateInterview = async (id: string, interviewResult: string) => {
   try {
+    const int = await Interview.findById(id);
     const updatedInterview = await Interview.findByIdAndUpdate(id, {
-      ...interview,
+      result: interviewResult,
     });
+    if (updatedInterview?.result == 'Failed') {
+      await Application.findByIdAndUpdate(updatedInterview?.application, {
+        status: 'Rejected',
+      });
+    }
     return updatedInterview;
   } catch (error) {
     console.log(error);

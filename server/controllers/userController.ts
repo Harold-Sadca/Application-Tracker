@@ -49,7 +49,7 @@ export const loginController = async (
 export const getUser = async (req: Request, res: Response) => {
   console.log(req.user);
   try {
-    const { id } = req.user;
+    const { id } = req.user as TypeUser;
     req.user = (await findUser(id as ObjectId)) as TypeUser;
     res.status(201).send(req.user);
   } catch (e) {

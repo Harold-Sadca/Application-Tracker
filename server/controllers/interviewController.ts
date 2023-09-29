@@ -45,10 +45,10 @@ export const updateInterviewController = async (
 ) => {
   try {
     const { id } = req.params;
-    const { date, time, application } = req.body;
-    const interview = { date, time, application };
-    if (date && time && application && id) {
-      const updatedInterview = await updateInterview(id, interview);
+    const { result } = req.body;
+    console.log(id, result);
+    if (result && id) {
+      const updatedInterview = await updateInterview(id, result);
       res.status(200).send(updatedInterview);
     } else {
       res.status(400).send(JSON.stringify('Missing Some Information.'));

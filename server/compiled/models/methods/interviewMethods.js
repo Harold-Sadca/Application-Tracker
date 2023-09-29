@@ -40,9 +40,17 @@ const getInterview = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getInterview = getInterview;
-const updateInterview = (id, interview) => __awaiter(void 0, void 0, void 0, function* () {
+const updateInterview = (id, interviewResult) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const updatedInterview = yield Interview_1.default.findByIdAndUpdate(id, Object.assign({}, interview));
+        const int = yield Interview_1.default.findById(id);
+        const updatedInterview = yield Interview_1.default.findByIdAndUpdate(id, {
+            result: interviewResult,
+        });
+        if ((updatedInterview === null || updatedInterview === void 0 ? void 0 : updatedInterview.result) == 'Failed') {
+            yield Application_1.default.findByIdAndUpdate(updatedInterview === null || updatedInterview === void 0 ? void 0 : updatedInterview.application, {
+                status: 'Rejected',
+            });
+        }
         return updatedInterview;
     }
     catch (error) {

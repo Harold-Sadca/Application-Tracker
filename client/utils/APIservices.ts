@@ -82,4 +82,25 @@ async function addInterview(interview: TypeInterview, application_id: string) {
     .catch((error) => error.response.data.error);
 }
 
-export { login, register, getUser, addApplication, addInterview };
+async function updateInterviewResult(result: Object, interview_id: string) {
+  return axios
+    .put(PORT + '/interview/update/' + interview_id, JSON.stringify(result), {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => error.response.data.error);
+}
+
+export {
+  login,
+  register,
+  getUser,
+  addApplication,
+  addInterview,
+  updateInterviewResult,
+};

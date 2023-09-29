@@ -60,7 +60,7 @@
   align-self: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 50%;
-  margin-top: 3rem;
+  justify-content: space-evenly;
+  min-height: 50%;
+  margin-top: 2rem;
 }
