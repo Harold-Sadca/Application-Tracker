@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = exports.loginController = exports.createUserController = void 0;
+exports.logoutUser = exports.getUser = exports.loginController = exports.createUserController = void 0;
 const passport_1 = __importDefault(require("passport"));
 const userMethods_1 = require("../models/methods/userMethods");
 const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -47,7 +47,6 @@ const loginController = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
                 if (err)
                     throw err;
                 const { _id } = req.user;
-                console.log(req.user);
                 req.user = (yield (0, userMethods_1.findUser)(_id));
                 res.status(200).send(req.user);
             }));
@@ -56,7 +55,8 @@ const loginController = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
 });
 exports.loginController = loginController;
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.user);
+    const sessionID = req.sessionID;
+    console.log({ sessionID });
     try {
         const { id } = req.user;
         req.user = (yield (0, userMethods_1.findUser)(id));
@@ -67,3 +67,12 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getUser = getUser;
+const logoutUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.status(200).send(JSON.stringify('You have logged out'));
+    });
+});
+exports.logoutUser = logoutUser;

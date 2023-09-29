@@ -43,6 +43,20 @@ async function getUser() {
     .then((res) => {
       return res.data;
     })
+    .catch((error) => console.log(error.response.data));
+}
+
+async function logout() {
+  return axios
+    .delete(PORT + '/user/logout', {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
     .catch((error) => error.response.data.error);
 }
 
@@ -125,4 +139,5 @@ export {
   addInterview,
   updateInterviewResult,
   updateApplicationStatus,
+  logout,
 };

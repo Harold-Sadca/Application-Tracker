@@ -87,7 +87,7 @@ export default function Interviews() {
   return (
     <main className='container'>
       <div className='header-container'>
-        <h1 className='header'>Interviews</h1>
+        <h1 className='header'>Upcoming Interviews</h1>
         {path == '/dashboard' ? '' : <button className='btn-plus'>+</button>}
       </div>
       <div className='applications-container'>

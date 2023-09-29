@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import passport from 'passport';
+import passport, { LogOutOptions } from 'passport';
 import { createUser, findUser } from '../models/methods/userMethods';
 import { TypeUser } from '../types/types';
 import { ObjectId } from 'mongodb';
@@ -37,7 +37,6 @@ export const loginController = async (
         req.logIn(user, async (err) => {
           if (err) throw err;
           const { _id } = req.user as TypeUser;
-          console.log(req.user);
           req.user = (await findUser(_id as ObjectId)) as TypeUser;
           res.status(200).send(req.user);
         });
@@ -47,7 +46,8 @@ export const loginController = async (
 };
 
 export const getUser = async (req: Request, res: Response) => {
-  console.log(req.user);
+  const sessionID = req.sessionID;
+  console.log({ sessionID });
   try {
     const { id } = req.user as TypeUser;
     req.user = (await findUser(id as ObjectId)) as TypeUser;
@@ -55,4 +55,17 @@ export const getUser = async (req: Request, res: Response) => {
   } catch (e) {
     res.status(400).send(JSON.stringify('Cannot find user'));
   }
+};
+
+export const logoutUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.status(200).send(JSON.stringify('You have logged out'));
+  });
 };

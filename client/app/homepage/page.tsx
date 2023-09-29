@@ -14,19 +14,17 @@ export default function Home() {
   const register = useSelector(
     (state: RootState) => state.registerReducer.value
   );
+  const router = useRouter();
 
   const dispatch = useDispatch();
   getUser().then((res: TypeLoggedInUser) => {
-    dispatch(loginUser(res));
-    dispatch(setApplications(res.applications));
-    localStorage.setItem('currentUserId', res._id);
-
     if (res) {
+      dispatch(loginUser(res));
+      dispatch(setApplications(res.applications));
       router.push('/dashboard');
       return null;
     }
   });
-  const router = useRouter();
 
   return (
     <main>

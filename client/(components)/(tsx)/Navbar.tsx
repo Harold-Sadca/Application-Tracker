@@ -1,8 +1,8 @@
 'use client';
 import * as React from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import '../(css)/navbar.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,9 +12,13 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { logout } from '@/utils/APIservices';
+import { logoutUser } from '@/redux/features/currentUserSlice';
 
 export default function Navbar() {
   const path = usePathname().slice(1).toLocaleUpperCase();
+  const dispatch = useDispatch();
+  const router = useRouter();
   const currentUser = useSelector(
     (state: RootState) => state.currentUserReducer.value
   );
@@ -28,6 +32,17 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
+  const handleLogout = async () => {
+    const loggedOut = await logout();
+    console.log(loggedOut);
+    if (loggedOut) {
+      setAnchorEl(null);
+      dispatch(logoutUser());
+      router.push('/');
+      console.log('user has logged out');
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static' sx={{ backgroundColor: '#7ea3af' }}>
@@ -35,7 +50,7 @@ export default function Navbar() {
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             {path}
           </Typography>
-          {currentUser.username && (
+          {currentUser ? (
             <div>
               <IconButton
                 size='large'
@@ -62,10 +77,10 @@ export default function Navbar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
-          )}
+          ) : null}
         </Toolbar>
       </AppBar>
     </Box>

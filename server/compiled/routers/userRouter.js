@@ -6,6 +6,7 @@ const authMiddleware_1 = require("../utils/authMiddleware");
 const userRouter = (0, express_1.Router)();
 userRouter.post('/register', userController_1.createUserController);
 userRouter.post('/login', userController_1.loginController);
+userRouter.delete('/logout', userController_1.logoutUser);
 userRouter.get('/get-user', authMiddleware_1.authenticate, userController_1.getUser);
 exports.default = userRouter;
 // {
