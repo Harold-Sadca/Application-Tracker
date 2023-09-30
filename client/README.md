@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Application Tracker
 
-## Getting Started
+Application Tracker is a web application for tracking job applications. It provides a user-friendly interface for managing and organizing your job application process.
 
-First, run the development server:
+## Technologies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- **Frontend**: TypeScript, Next.js, Material UI, CSS, Redux Toolkit
+- **Backend**: TypeScript, Node.js, Express
+- **Database**: MongoDB, Mongoose
+- **Authentication**: Passport
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **User Registration and Authentication**: Users can create accounts, log in, and securely authenticate using Passport.
+- **Application Tracking**: Easily add, update, and manage job applications.
+- **Dashboard**: View a summary of your job application progress.
+- **Database Storage**: Applications and user data are securely stored in a MongoDB database using Mongoose.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Installation
 
-## Learn More
+To run the application locally, follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   git clone https://github.com/Harold-Sadca/Application-Tracker
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Install dependencies for both the frontend and backend:
 
-## Deploy on Vercel
+   ```bash
+   cd application-tracker
+   cd client
+   npm install
+   cd ../server
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Configure Environment Variables:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   Create a `.env` file in the `server` directory with the following content:
+
+   ```env
+   DB_URL=<your-mongodb-connection-string>
+   SECRET_KEY_WORD=<your-secret-key>
+   ```
+
+4. Seed Database (Optional):
+
+   You can populate the database with mock data by running the following command in the `backend` directory:
+
+   ```bash
+   npm run seeds
+   ```
+
+5. Start the Development Servers:
+
+   In separate terminal windows, start the frontend and backend servers:
+
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+   ```bash
+   cd backend
+   npm run dev
+   ```
+
+6. Access the Application:
+
+   Open your web browser and navigate to [http://localhost:3000](http://localhost:3000) to access the Application Tracker.
+
+## Usage
+
+- Register for an account or log in if you already have one.
+- Add job applications with relevant details.
+- Monitor your job application progress through the dashboard.

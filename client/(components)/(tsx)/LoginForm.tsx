@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setLoginState } from '@/redux/features/registerSlice';
 import { loginUser } from '@/redux/features/currentUserSlice';
 import '../(css)/loginForm.css';
+import { useRouter } from 'next/navigation';
 
 const initialState = {
   username: '',
@@ -15,6 +16,7 @@ const initialState = {
 export default function LoginForm() {
   const [formState, setFormState] = useState<TypeLogin>(initialState);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -29,6 +31,7 @@ export default function LoginForm() {
     const user = await login(formState);
     dispatch(loginUser(user));
     setFormState(initialState);
+    router.push('/dashboard');
   };
 
   const handleRegister = () => {
