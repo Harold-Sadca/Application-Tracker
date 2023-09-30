@@ -78,7 +78,7 @@ export default function Applications() {
   };
 
   return (
-    <main className='container'>
+    <main className={path == '/dashboard' ? 'container' : 'container-main'}>
       <div className='header-container'>
         <h1 className='header'>Applications</h1>
         {path == '/dashboard' ? (

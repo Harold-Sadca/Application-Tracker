@@ -39,13 +39,12 @@ export default function Navbar() {
       setAnchorEl(null);
       dispatch(logoutUser());
       router.push('/');
-      console.log('user has logged out');
     }
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static' sx={{ backgroundColor: '#7ea3af' }}>
+      <AppBar position='static' className='nav'>
         <Toolbar>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             {path}

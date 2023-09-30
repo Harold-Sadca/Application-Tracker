@@ -10,6 +10,7 @@
   border: 1px solid var(--accent-colour);
   border-radius: 10px;
   width: 20rem;
+  color: var(--text-colour);
 }
 
 .input-container {
