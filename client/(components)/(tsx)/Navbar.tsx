@@ -50,7 +50,7 @@ export default function Navbar() {
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             {path}
           </Typography>
-          {currentUser ? (
+          {currentUser.username ? (
             <div>
               <IconButton
                 size='large'
