@@ -34,12 +34,16 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     const loggedOut = await logout();
-    console.log(loggedOut);
     if (loggedOut) {
       setAnchorEl(null);
       dispatch(logoutUser());
       router.push('/');
     }
+  };
+
+  const handleNavigate = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    const targetElement = e.target as HTMLLIElement;
+    router.push(targetElement.id);
   };
 
   return (
@@ -76,6 +80,15 @@ export default function Navbar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
+                {path == 'DASHBOARD' ? (
+                  <MenuItem id='/profile' onClick={(e) => handleNavigate(e)}>
+                    Profile
+                  </MenuItem>
+                ) : (
+                  <MenuItem id='/dashboard' onClick={(e) => handleNavigate(e)}>
+                    Dashboard
+                  </MenuItem>
+                )}
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>

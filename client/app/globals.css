@@ -52,6 +52,11 @@ body {
   margin-top: 2rem;
 }
 
+.main-body {
+  width: 80%;
+  margin: auto;
+}
+
 .btn-1 {
   color: var(--text-colour);
   font-weight: 700;

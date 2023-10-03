@@ -59,3 +59,9 @@ export const interviewTypes = [
   'Pair Programming Interviews',
   'Case Study Interviews',
 ];
+
+export const getComputedStyleValue = (variableName: string) => {
+  return getComputedStyle(document.documentElement).getPropertyValue(
+    variableName
+  );
+};

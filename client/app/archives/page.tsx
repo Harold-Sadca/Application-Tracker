@@ -8,8 +8,6 @@ import { getUser } from '@/utils/APIservices';
 import { TypeApplicationResponse, TypeLoggedInUser } from '@/utils/types';
 import { loginUser } from '@/redux/features/currentUserSlice';
 import { setApplications } from '@/redux/features/applicationsSlice';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 
 export default function Archives() {
   const dispatch = useDispatch();
