@@ -18,7 +18,7 @@ export default function Archives() {
   );
 
   useEffect(() => {
-    if (!currentUser._id) {
+    if (!currentUser.username) {
       getUser().then((res: TypeLoggedInUser) => {
         dispatch(loginUser(res));
         dispatch(setApplications(res.applications));

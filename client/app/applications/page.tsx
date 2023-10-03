@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { RootState } from '@/redux/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReactModal from 'react-modal';
 import { TypeApplicationResponse } from '@/utils/types';
 import { usePathname, useRouter } from 'next/navigation';
@@ -11,7 +11,8 @@ import '../../(components)/(css)/dashboard.css';
 import ApplicationForm from '@/(components)/(tsx)/ApplicationForm';
 import { formatDate, generateTimeSlots } from '@/utils/utils';
 import InterviewForm from '@/(components)/(tsx)/InterviewForm';
-import { updateApplicationStatus } from '@/utils/APIservices';
+import { getUser, updateApplicationStatus } from '@/utils/APIservices';
+import { loginUser } from '@/redux/features/currentUserSlice';
 
 const initialValue = {
   company: '',
@@ -33,6 +34,7 @@ export default function Applications() {
   const currentUser = useSelector(
     (state: RootState) => state.currentUserReducer.value
   );
+  const dispatch = useDispatch();
   const path = usePathname();
   const router = useRouter();
   const [applicationId, setApplicationId] = useState('');
@@ -44,6 +46,11 @@ export default function Applications() {
   useEffect(() => {
     appElement.current = document.body;
     ReactModal.setAppElement(appElement.current);
+    if (!currentUser.username) {
+      getUser().then((res) => {
+        dispatch(loginUser(res));
+      });
+    }
   }, []);
 
   const handleItemClick = (item: TypeApplicationResponse) => {

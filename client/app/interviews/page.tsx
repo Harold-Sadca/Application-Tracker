@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RootState } from '@/redux/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -15,7 +15,8 @@ import { TypeApplicationResponse } from '@/utils/types';
 import { usePathname, useRouter } from 'next/navigation';
 import { formatDate } from '@/utils/utils';
 import { TypeInterview } from '../../../server/types/types';
-import { updateInterviewResult } from '@/utils/APIservices';
+import { getUser, updateInterviewResult } from '@/utils/APIservices';
+import { loginUser } from '@/redux/features/currentUserSlice';
 
 const initialValue = {
   company: '',
@@ -40,6 +41,16 @@ export default function Interviews() {
   const currentUser = useSelector(
     (state: RootState) => state.currentUserReducer.value
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!currentUser.username) {
+      getUser().then((res) => {
+        dispatch(loginUser(res));
+      });
+    }
+  });
   const router = useRouter();
   const path = usePathname();
   const applications = currentUser.applications;

@@ -15,7 +15,7 @@ async function login(user: TypeLogin) {
     .then((res) => {
       return res.data;
     })
-    .catch((error) => error.response.data.error);
+    .catch((error) => error.response.data);
 }
 
 async function register(user: TypeRegister) {
@@ -29,7 +29,7 @@ async function register(user: TypeRegister) {
     .then((res) => {
       return res.data;
     })
-    .catch((error) => error.response.data.error);
+    .catch((error) => error.response.data);
 }
 
 async function getUser() {
@@ -57,7 +57,7 @@ async function logout() {
     .then((res) => {
       return res.data;
     })
-    .catch((error) => error.response.data.error);
+    .catch((error) => error.response.data);
 }
 
 async function addApplication(application: TypeApplication, user_id: string) {
@@ -75,7 +75,7 @@ async function addApplication(application: TypeApplication, user_id: string) {
     .then((res) => {
       return res.data;
     })
-    .catch((error) => error.response.data.error);
+    .catch((error) => error.response.data);
 }
 
 async function addInterview(interview: TypeInterview, application_id: string) {
@@ -93,7 +93,7 @@ async function addInterview(interview: TypeInterview, application_id: string) {
     .then((res) => {
       return res.data;
     })
-    .catch((error) => error.response.data.error);
+    .catch((error) => error.response.data);
 }
 
 async function updateApplicationStatus(
@@ -114,7 +114,7 @@ async function updateApplicationStatus(
     .then((res) => {
       return res.data;
     })
-    .catch((error) => error.response.data.error);
+    .catch((error) => error.response.data);
 }
 
 async function updateInterviewResult(result: Object, interview_id: string) {
@@ -128,7 +128,7 @@ async function updateInterviewResult(result: Object, interview_id: string) {
     .then((res) => {
       return res.data;
     })
-    .catch((error) => error.response.data.error);
+    .catch((error) => error.response.data);
 }
 
 export {
