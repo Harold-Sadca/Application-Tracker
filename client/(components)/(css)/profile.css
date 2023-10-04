@@ -6,3 +6,31 @@
   justify-content: center;
   align-items: center;
 }
+
+.charts-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  min-height: 80vh;
+}
+
+.reminders-container {
+  display: flex;
+  align-self: flex-start;
+}
+
+.to-apply {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-self: center;
+}
