@@ -57,21 +57,22 @@ export default function Profile() {
           <div className='charts-container'>
             <div className='reminders-container'>
               <section className='to-apply'>
-                <h4>Do not forget to finish your application with:</h4>
                 {toApply.length ? (
-                  toApply.map((app: TypeApplicationResponse) => {
-                    return (
-                      <InterviewApplicationItem
-                        key={app._id as unknown as string}
-                        item={app}
-                        secondItem={null}
-                        onItemClick={handleItemClick}
-                      />
-                    );
-                  })
+                  <h4>Do not forget to finish your application with:</h4>
                 ) : (
-                  <p>You have no unfinished application</p>
+                  <h4>You have no unfinished application</h4>
                 )}
+
+                {toApply.map((app: TypeApplicationResponse) => {
+                  return (
+                    <InterviewApplicationItem
+                      key={app._id as unknown as string}
+                      item={app}
+                      secondItem={null}
+                      onItemClick={handleItemClick}
+                    />
+                  );
+                })}
                 <p className='button-container'>
                   <Button
                     variant='contained'
