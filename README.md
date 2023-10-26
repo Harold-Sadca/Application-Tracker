@@ -47,7 +47,7 @@ To run the application locally, follow these steps:
 
 4. Seed Database (Optional):
 
-   You can populate the database with mock data by running the following command in the `backend` directory:
+   You can populate the database with mock data by running the following command in the `server` directory:
 
    ```bash
    npm run seeds
@@ -55,15 +55,15 @@ To run the application locally, follow these steps:
 
 5. Start the Development Servers:
 
-   In separate terminal windows, start the frontend and backend servers:
+   In separate terminal windows, start the client and server servers:
 
    ```bash
-   cd frontend
+   cd client
    npm run dev
    ```
 
    ```bash
-   cd backend
+   cd server
    npm run dev
    ```
 
